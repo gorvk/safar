@@ -9,3 +9,4 @@
 - Tailwind
 - Go
 - Firebase
+![safar 0_1 core ui_ux](https://github.com/user-attachments/assets/e53aa6f5-ac15-494c-9f64-df4fbc4444e5)
