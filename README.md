@@ -9,4 +9,5 @@
 - Tailwind
 - Go
 - Firebase
-![safar 0_1 core ui_ux](https://github.com/user-attachments/assets/e53aa6f5-ac15-494c-9f64-df4fbc4444e5)
+
+![Untitled-2024-02-17-083s6](https://github.com/user-attachments/assets/c074f2fa-afda-49ee-9c91-be189d801e09)
