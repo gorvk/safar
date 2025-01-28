@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { getFeedData } from "../../svc/feed";
+import { getItineraryFeedData } from "../../svc/feed";
 import { ItineraryFeed } from "../../types";
 import { FeedItem } from "./FeedItem";
 
 export const FeedList = () => {
   const [feedData, setFeedData] = useState<ItineraryFeed[]>([]);
   const getData = async () => {
-    const data = await getFeedData();
+    const data = await getItineraryFeedData();
     setFeedData(data);
   };
 

@@ -1,10 +1,17 @@
+import { getItineraryDetailData } from "../../svc/feed";
 import { ItineraryFeed } from "../../types";
 
 export const FeedItem = (props: { data: ItineraryFeed }) => {
   const { data } = props;
   const date = data.uploaded_duration.toDate();
+
+  const getDetailData = async () => {
+    const detailData = await getItineraryDetailData(false, data.id);
+    console.log(detailData);
+  }
+
   return (
-    <div className="border-1 my-7 rounded-xl overflow-hidden">
+    <div className="border-1 my-7 rounded-xl overflow-hidden" onClick={getDetailData}>
       <div>
         <img className="relative" src={data.thumbnail_url} />
       </div>
