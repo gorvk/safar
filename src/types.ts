@@ -11,5 +11,5 @@ export type TItineraryFeed = {
 
 export type TItineraryDetail = TItineraryFeed & { 
     checkpoints: {}[];
-    photos: {}[];
+    photos: string[];
 }
