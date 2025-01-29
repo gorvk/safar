@@ -9,7 +9,10 @@ export type TItineraryFeed = {
     uploaded_duration: Timestamp;
 }
 
-export type TItineraryDetail = TItineraryFeed & { 
-    checkpoints: {}[];
+export type TItineraryDetail = TItineraryFeed & {
+    checkpoints: {
+        title: string,
+        location_url: string,
+    }[];
     photos: string[];
 }

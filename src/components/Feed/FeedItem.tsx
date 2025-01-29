@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { TItineraryFeed } from "../../types";
+import { SourceDestinationBar } from "../SourceDestinationBar/SourceDestinationBar";
+import { MetadataBar } from "../MetadataBar/MetadataBar";
 
 export const FeedItem = (props: { data: TItineraryFeed }) => {
   const { data } = props;
-  const date = data.uploaded_duration.toDate();
   const navigate = useNavigate();
 
   return (
@@ -15,16 +16,14 @@ export const FeedItem = (props: { data: TItineraryFeed }) => {
         <img className="relative" src={data.thumbnail_url} />
       </div>
       <div className="p-4 border-t-1">
-        <h1>{data.title}</h1>
-        <h1>
-          {data.source_destination[0] + " -> " + data.source_destination[0]}
-        </h1>
-        <div className="flex justify-between w-56">
-          <div>{data.user_id}</div>
-          <div>
-            {date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear()}
-          </div>
+        <div className="text-lg font-bold truncate">{data.title}</div>
+        <div className="text-md">
+          <SourceDestinationBar source_destination={data.source_destination} />
         </div>
+        <MetadataBar
+          userId={data.user_id}
+          uploadedDuration={data.uploaded_duration}
+        />
       </div>
     </div>
   );
