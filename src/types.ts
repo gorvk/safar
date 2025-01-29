@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-export type ItineraryFeed = {
+export type TItineraryFeed = {
     id: string;
     title: string;
     user_id: string;
@@ -9,7 +9,7 @@ export type ItineraryFeed = {
     uploaded_duration: Timestamp;
 }
 
-export type ItineraryDetail = ItineraryFeed & { 
+export type TItineraryDetail = TItineraryFeed & { 
     checkpoints: {}[];
     photos: {}[];
 }
