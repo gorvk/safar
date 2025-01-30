@@ -5,9 +5,9 @@ export const CheckpointItem = (props: { checkpoint: TCheckpoint }) => {
   const time = getTime(checkpoint.visited_at);
 
   return (
-    <li onClick={() => window.open(checkpoint.location_url, "_blank")}>
+    <li>
       <div className="border-r-3 h-4 w-6 border-dashed"/>
-      <div className="my-1 bg-teal-600 py-2 px-3 rounded-lg text-white font-medium flex justify-between cursor-pointer">
+      <div onClick={() => window.open(checkpoint.location_url, "_blank")} className="my-1 bg-teal-600 py-2 px-3 rounded-lg text-white font-medium flex justify-between cursor-pointer">
         <div className="flex gap-4 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
