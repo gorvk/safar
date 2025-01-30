@@ -1,4 +1,4 @@
-import searchIcon from "../../assets/icons/search.svg";
+import { Search } from "../../Icons/Search";
 
 export const SearchBar = () => {
   return (
@@ -13,7 +13,7 @@ export const SearchBar = () => {
           className="m-1 p-2 cursor-pointer"
           onClick={() => console.log("clickedddd")}
         >
-          <img height="25" width="25" src={searchIcon} />
+          <Search />
         </div>
       </div>
     </div>

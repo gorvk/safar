@@ -10,9 +10,12 @@ export type TItineraryFeed = {
 }
 
 export type TItineraryDetail = TItineraryFeed & {
-    checkpoints: {
-        title: string,
-        location_url: string,
-    }[];
+    checkpoints: TCheckpoint[];
     photos: string[];
 }
+
+export type TCheckpoint = {
+    title: string;
+    location_url: string;
+    visited_at: Timestamp;
+};

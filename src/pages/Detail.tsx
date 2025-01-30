@@ -2,9 +2,10 @@ import { useLocation, useParams } from "react-router";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { TItineraryDetail } from "../types";
 import { useEffect, useState } from "react";
-import { Spinner } from "../components/Spinner/Spinner";
 import { SourceDestinationBar } from "../components/SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
+import { CheckpointList } from "../components/Checkpoint/CheckpointList";
+import { Spinner } from "../Icons/Spinner";
 
 export const Detail = () => {
   const location = useLocation();
@@ -28,10 +29,10 @@ export const Detail = () => {
 
   return (
     <>
-      <div>
-        <img className="relative" src={data.photos[0]} />
+      <div className="w-full border-2 h-90 bg-black flex items-center overflow-hidden">
+        <img src={data.photos[0]} className="size-fit m-auto" />
       </div>
-      <div className="m-8 flex flex-col gap-2">
+      <div className="m-6 flex flex-col gap-2">
         <div className="text-xl font-bold">{data.title}</div>
         <MetadataBar
           userId={data.user_id}
@@ -42,13 +43,7 @@ export const Detail = () => {
           <SourceDestinationBar source_destination={data.source_destination} />
         </div>
         <div>
-          <ul className="flex flex-col">
-            {data.checkpoints.map((checkpoint, index) => (
-              <li className="my-1" key={index}>
-                {checkpoint.title}
-              </li>
-            ))}
-          </ul>
+          <CheckpointList checkpoints={data.checkpoints} />
         </div>
       </div>
     </>

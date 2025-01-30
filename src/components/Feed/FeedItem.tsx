@@ -9,11 +9,11 @@ export const FeedItem = (props: { data: TItineraryFeed }) => {
 
   return (
     <div
-      className="border-1 my-7 rounded-xl overflow-hidden"
+      className="border-1 my-7 rounded-xl overflow-hidden cursor-pointer"
       onClick={() => navigate(`/detail/${data.id}`, { state: { data } })}
     >
-      <div>
-        <img className="relative" src={data.thumbnail_url} />
+      <div className="bg-black">
+        <img className="size-fit m-auto" src={data.thumbnail_url} />
       </div>
       <div className="p-4 border-t-1">
         <div className="text-lg font-bold truncate">{data.title}</div>
