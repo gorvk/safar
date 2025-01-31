@@ -29,8 +29,8 @@ export const Detail = () => {
 
   return (
     <>
-      <div className="w-full border-2 h-90 bg-black flex items-center overflow-hidden">
-        <img src={data.photos[0]} className="size-fit m-auto" />
+      <div className="w-full border-2 h-90 bg-black flex items-center">
+        <img src={data.photos[0]} className="w-fit h-full m-auto" />
       </div>
       <div className="m-6 flex flex-col gap-2">
         <div className="text-xl font-bold">{data.title}</div>
@@ -43,7 +43,7 @@ export const Detail = () => {
           <SourceDestinationBar source_destination={data.source_destination} />
         </div>
         <div>
-          <CheckpointList checkpoints={data.checkpoints} />
+          <CheckpointList checkpoints={data.checkpoints} itineraryId={data.id} />
         </div>
       </div>
     </>

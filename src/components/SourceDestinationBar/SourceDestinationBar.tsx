@@ -8,10 +8,14 @@ export const SourceDestinationBar = (props: {
   return (
     <div className="font-medium flex justify-start gap-6 items-center">
       <div>{source_destination[0]}</div>
-      <div>
-        <RightArrow />
-      </div>
-      <div>{source_destination[1]}</div>
+      {source_destination.length === 2 && (
+        <>
+          <div>
+            <RightArrow />
+          </div>
+          <div>{source_destination[1]}</div>
+        </>
+      )}
     </div>
   );
 };

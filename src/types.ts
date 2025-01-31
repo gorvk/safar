@@ -18,4 +18,5 @@ export type TCheckpoint = {
     title: string;
     location_url: string;
     visited_at: Timestamp;
+    things_to_try: string[];
 };

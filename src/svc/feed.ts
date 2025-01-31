@@ -26,14 +26,14 @@ const getItineraryDataSF = async <T>(collectionName: string, value: string | Doc
     }
 }
 
-export const getItineraryDetailDataSF = async (feedData: TItineraryFeed, id: string): Promise<TItineraryDetail> => {
+export const getItineraryDetailDataSF = async (feedData: TItineraryFeed | undefined, id: string): Promise<TItineraryDetail> => {
     try {
         if (!feedData) {
             feedData = await getItineraryDataSF<TItineraryDetail>("itinerary_feed", id, documentId());
         }
         const feedRef = doc(db, "itinerary_feed", id);
         const detailData = await getItineraryDataSF<TItineraryDetail>("itinerary_detail", feedRef, "feed_id");
-        return { ...feedData, ...detailData }
+        return { ...feedData, ...detailData, id: feedRef.id }
     } catch (err) {
         console.error(err)
         return {} as TItineraryDetail;

@@ -13,7 +13,7 @@ export const FeedItem = (props: { data: TItineraryFeed }) => {
       onClick={() => navigate(`/detail/${data.id}`, { state: { data } })}
     >
       <div className="bg-black">
-        <img className="size-fit m-auto" src={data.thumbnail_url} />
+        <img className="w-fit h-full m-auto" src={data.thumbnail_url} />
       </div>
       <div className="p-4 border-t-1">
         <div className="text-lg font-bold truncate">{data.title}</div>
