@@ -6,6 +6,7 @@ import { SourceDestinationBar } from "../components/SourceDestinationBar/SourceD
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
 import { CheckpointList } from "../components/Checkpoint/CheckpointList";
 import { Spinner } from "../Icons/Spinner";
+import { ImageGrid } from "../components/ImageGrid/ImageGrid";
 
 export const Detail = () => {
   const location = useLocation();
@@ -29,9 +30,7 @@ export const Detail = () => {
 
   return (
     <>
-      <div className="w-full border-2 h-90 bg-black flex items-center">
-        <img src={data.photos[0]} className="w-fit h-full m-auto" />
-      </div>
+      <ImageGrid photoUrls={[data.thumbnail_url, ...data.photos]} />
       <div className="m-6 flex flex-col gap-2">
         <div className="text-xl font-bold">{data.title}</div>
         <MetadataBar
