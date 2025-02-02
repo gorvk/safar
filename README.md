@@ -10,4 +10,4 @@
 - Go
 - Supabase
 
-![Untitled-2024-02-17-083s6](https://github.com/user-attachments/assets/c074f2fa-afda-49ee-9c91-be189d801e09)
+![safar 0_1 uiux embeded](https://github.com/user-attachments/assets/d524c475-0e2c-41c0-aa6c-2ea05c65715b)
