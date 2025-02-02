@@ -1,19 +1,20 @@
 import { RightArrow } from "../../Icons/RightArrow";
 
 export const SourceDestinationBar = (props: {
-  source_destination: string[];
+  source: string;
+  destination: string;
 }) => {
-  const { source_destination } = props;
+  const { source, destination } = props;
 
   return (
     <div className="font-medium flex justify-start gap-6 items-center">
-      <div>{source_destination[0]}</div>
-      {source_destination.length === 2 && (
+      <div>{source}</div>
+      {destination && (
         <>
           <div>
             <RightArrow />
           </div>
-          <div>{source_destination[1]}</div>
+          <div>{destination}</div>
         </>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { TItineraryDetail } from "../types";
 import { useEffect, useState } from "react";
@@ -9,24 +9,24 @@ import { Spinner } from "../Icons/Spinner";
 import { ImageGrid } from "../components/ImageGrid/ImageGrid";
 
 export const Detail = () => {
-  const location = useLocation();
   const { id } = useParams();
   const [data, setData] = useState<TItineraryDetail>();
 
   const getItineraryDetailData = async () => {
     if (id) {
-      const { state } = location;
-      const feedData = state?.data;
-      const detailData = await getItineraryDetailDataSF(feedData, id);
+      const detailData = await getItineraryDetailDataSF(id);
       setData(detailData);
     }
   };
 
   useEffect(() => {
     getItineraryDetailData();
-  }, [location]);
+  }, []);
 
   if (!data) return <Spinner />;
+
+  if(!data.photos) data.photos = [];
+  if(!data.checkpoints) data.checkpoints = [];
 
   return (
     <>
@@ -39,7 +39,7 @@ export const Detail = () => {
         />
         <hr />
         <div className="text-lg">
-          <SourceDestinationBar source_destination={data.source_destination} />
+          <SourceDestinationBar source={data.source} destination={data.destination} />
         </div>
         <div>
           <CheckpointList checkpoints={data.checkpoints} itineraryId={data.id} />

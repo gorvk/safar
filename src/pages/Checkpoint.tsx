@@ -17,7 +17,7 @@ export const Checkpoint = () => {
       const { state } = location;
       let data: TCheckpoint = state?.data;
       if (!data) {
-        const detailData = await getItineraryDetailDataSF(undefined, id);
+        const detailData = await getItineraryDetailDataSF(id);
         data = detailData.checkpoints[parseInt(checkpointId)];
       }
       setCheckpointData(data);
@@ -48,7 +48,8 @@ export const Checkpoint = () => {
         <hr />
         <div className="text-lg">
           <SourceDestinationBar
-            source_destination={["Things to Try".toUpperCase()]}
+            source="Things to Try"
+            destination=""
           />
         </div>
         <div>

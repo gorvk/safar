@@ -1,16 +1,15 @@
-import { Timestamp } from "firebase/firestore";
 import { getDate } from "../../utils";
 
 export const MetadataBar = (props: {
   userId?: string;
-  uploadedDuration: Timestamp;
+  uploadedDuration: string;
 }) => {
   const { userId, uploadedDuration } = props;
   const formatedDate = getDate(uploadedDuration);
 
   return (
-    <div className="flex justify-start gap-6 text-gray-500 font-medium">
-      {userId && <div>{userId}</div>}
+    <div className="justify-start gap-6 text-gray-500 font-medium">
+      {userId && <div className="truncate">{userId}</div>}
       <div>{formatedDate}</div>
     </div>
   );

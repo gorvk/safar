@@ -1,12 +1,11 @@
-import { Timestamp } from "firebase/firestore";
-
 export type TItineraryFeed = {
     id: string;
     title: string;
     user_id: string;
     thumbnail_url: string;
-    source_destination: string[];
-    uploaded_duration: Timestamp;
+    source: string;
+    destination: string;
+    uploaded_duration: string;
 }
 
 export type TItineraryDetail = TItineraryFeed & {
@@ -17,6 +16,11 @@ export type TItineraryDetail = TItineraryFeed & {
 export type TCheckpoint = {
     title: string;
     location_url: string;
-    visited_at: Timestamp;
+    visited_at: string;
     things_to_try: string[];
 };
+
+export type TSupabaseConfig = {
+    supabaseUrl: string; 
+    supabaseKey: string;
+}

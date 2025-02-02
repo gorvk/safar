@@ -10,7 +10,7 @@ export const FeedItem = (props: { data: TItineraryFeed }) => {
   return (
     <div
       className="border-1 my-7 rounded-xl overflow-hidden cursor-pointer"
-      onClick={() => navigate(`/detail/${data.id}`, { state: { data } })}
+      onClick={() => navigate(`/detail/${data.id}`)}
     >
       <div className="bg-black">
         <img className="w-fit h-full m-auto" src={data.thumbnail_url} />
@@ -18,7 +18,7 @@ export const FeedItem = (props: { data: TItineraryFeed }) => {
       <div className="p-4 border-t-1">
         <div className="text-lg font-bold truncate">{data.title}</div>
         <div className="text-md">
-          <SourceDestinationBar source_destination={data.source_destination} />
+          <SourceDestinationBar source={data.source} destination={data.destination} />
         </div>
         <MetadataBar
           userId={data.user_id}
