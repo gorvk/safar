@@ -1,1 +1,3 @@
-export const AddItinerary = () => <>Add Itinerary Page !</>
+import { ItineraryForm } from "../components/Itinerary/ItineraryForm";
+
+export const AddItinerary = () => <ItineraryForm />;
