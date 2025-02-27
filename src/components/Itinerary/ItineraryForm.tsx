@@ -2,28 +2,32 @@ import { useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import { TCheckpoint, TItineraryDetail } from "../../types";
+import { TCheckpointListItem, TItineraryDetail } from "../../types";
 
 export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
   const { data } = props;
-  const [checkpoints, setCheckpoints] = useState<TCheckpoint[]>(
-    data?.checkpoints ?? []
+  const [checkpoints, setCheckpoints] = useState<TCheckpointListItem[]>(
+    data?.checkpoints.map((checkpoint) => ({
+      ...checkpoint,
+      id: crypto.randomUUID(),
+    })) ?? []
   );
 
   const addCheckpoint = () => {
-    setCheckpoints([...checkpoints, {} as TCheckpoint]);
+    setCheckpoints([
+      ...checkpoints,
+      {
+        id: crypto.randomUUID(),
+        things_to_try: [],
+        location_url: "",
+        title: "",
+        visited_at: "",
+      } as TCheckpointListItem,
+    ]);
   };
 
   const deleteCheckpoint = (index: number) => {
-    const copy = [...checkpoints];
-    copy.splice(index, 1);
-    setCheckpoints([...copy]);
-  };
-
-  const setCheckpoint = (index: number, data: TCheckpoint) => {
-    const copy = [...checkpoints];
-    copy[index].title = data.title;
-    setCheckpoints([...copy]);
+    setCheckpoints(checkpoints.filter((_, idx) => index !== idx));
   };
 
   return (
@@ -62,10 +66,9 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
         </div>
         {checkpoints.map((data, index) => (
           <CheckpointForm
-            key={index}
+            key={data.id}
             index={index}
             data={data}
-            setCheckpoint={setCheckpoint}
             deleteCheckpoint={() => deleteCheckpoint(index)}
           />
         ))}

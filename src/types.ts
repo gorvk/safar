@@ -21,6 +21,17 @@ export type TCheckpoint = {
 };
 
 export type TSupabaseConfig = {
-    supabaseUrl: string; 
+    supabaseUrl: string;
     supabaseKey: string;
+}
+
+export type TUUID = `${string}-${string}-${string}-${string}-${string}`
+
+export type TCheckpointListItem = TCheckpoint & {
+    id: TUUID;
+}
+
+export type TThingsToTryListItem = {
+    id: TUUID;
+    value: string;
 }

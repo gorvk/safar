@@ -1,22 +1,24 @@
 import { useRef, useState } from "react";
 import { ListUI } from "../../Icons/ListUl";
 import { Trash } from "../../Icons/Trash";
-import { TCheckpoint } from "../../types";
+import { TCheckpoint, TThingsToTryListItem } from "../../types";
 
 export const CheckpointForm = (props: {
   data: TCheckpoint;
   deleteCheckpoint: () => void;
-  setCheckpoint: (index: number, data: TCheckpoint) => void;
   index: number;
 }) => {
-  const [thingsToTry, setThingsToTry] = useState<string[]>(
-    props.data.things_to_try ?? []
+  const [thingsToTry, setThingsToTry] = useState<TThingsToTryListItem[]>(
+    props.data.things_to_try.map((value) => ({
+      value,
+      id: crypto.randomUUID(),
+    })) ?? []
   );
 
   const ref = useRef<HTMLInputElement>(null);
 
   const addThingsToTry = () => {
-    setThingsToTry([...thingsToTry, ""]);
+    setThingsToTry([...thingsToTry, { value: "", id: crypto.randomUUID() }]);
   };
 
   return (
@@ -26,12 +28,6 @@ export const CheckpointForm = (props: {
           defaultValue={props.data.title}
           placeholder="Checkpoint title"
           ref={ref}
-          onChange={() =>
-            props.setCheckpoint(props.index, {
-              ...props.data,
-              title: ref.current?.value || "",
-            })
-          }
           className="text-2xl outline-0 w-full"
         />
         <div className="cursor-pointer" onClick={addThingsToTry}>
@@ -42,10 +38,10 @@ export const CheckpointForm = (props: {
         </div>
       </div>
       <input placeholder="Time picker" className="text-2xl outline-0" />
-      {thingsToTry.map((value, index) => (
+      {thingsToTry.map((data) => (
         <input
-          key={index}
-          defaultValue={value}
+          key={data.id}
+          defaultValue={data.value}
           placeholder="Things to try"
           className="text-2xl outline-0"
         />
