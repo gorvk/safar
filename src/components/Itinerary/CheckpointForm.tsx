@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ListUI } from "../../Icons/ListUl";
 import { Trash } from "../../Icons/Trash";
 import { TCheckpoint } from "../../types";
@@ -6,10 +6,14 @@ import { TCheckpoint } from "../../types";
 export const CheckpointForm = (props: {
   data: TCheckpoint;
   deleteCheckpoint: () => void;
+  setCheckpoint: (index: number, data: TCheckpoint) => void;
+  index: number;
 }) => {
   const [thingsToTry, setThingsToTry] = useState<string[]>(
     props.data.things_to_try ?? []
   );
+
+  const ref = useRef<HTMLInputElement>(null);
 
   const addThingsToTry = () => {
     setThingsToTry([...thingsToTry, ""]);
@@ -21,6 +25,13 @@ export const CheckpointForm = (props: {
         <input
           defaultValue={props.data.title}
           placeholder="Checkpoint title"
+          ref={ref}
+          onChange={() =>
+            props.setCheckpoint(props.index, {
+              ...props.data,
+              title: ref.current?.value || "",
+            })
+          }
           className="text-2xl outline-0 w-full"
         />
         <div className="cursor-pointer" onClick={addThingsToTry}>

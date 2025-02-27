@@ -15,9 +15,15 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
   };
 
   const deleteCheckpoint = (index: number) => {
-    const a = [...checkpoints];
-    a.splice(index, 1);
-    setCheckpoints([...a]);
+    const copy = [...checkpoints];
+    copy.splice(index, 1);
+    setCheckpoints([...copy]);
+  };
+
+  const setCheckpoint = (index: number, data: TCheckpoint) => {
+    const copy = [...checkpoints];
+    copy[index].title = data.title;
+    setCheckpoints([...copy]);
   };
 
   return (
@@ -54,10 +60,12 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
             <ListUI color="fill-teal-600" />
           </div>
         </div>
-        {data?.checkpoints.map((data, index) => (
+        {checkpoints.map((data, index) => (
           <CheckpointForm
             key={index}
+            index={index}
             data={data}
+            setCheckpoint={setCheckpoint}
             deleteCheckpoint={() => deleteCheckpoint(index)}
           />
         ))}
