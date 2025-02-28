@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import { TCheckpoint, TItineraryDetail, TListItem } from "../../types";
+import { TCheckpoint, TItineraryDetail, TListItem, TUUID } from "../../types";
 import { ImageItem } from "./ImageItem";
 
 export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
@@ -14,7 +14,7 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
     })) ?? []
   );
 
-  const [photos] = useState<TListItem<string>[]>(
+  const [photos, setPhotos] = useState<TListItem<string>[]>(
     data?.photos.map((value) => ({
       value,
       id: crypto.randomUUID(),
@@ -38,6 +38,10 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
 
   const deleteCheckpoint = (index: number) => {
     setCheckpoints(checkpoints.filter((_, idx) => index !== idx));
+  };
+
+  const deletePhoto = (id: TUUID) => {
+    setPhotos(photos.filter((value) => value.id !== id));
   };
 
   return (
@@ -66,7 +70,11 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
       </div>
       <div className="flex items-baseline w-full overflow-x-auto gap-4 p-2">
         {photos.map((photo) => (
-          <ImageItem key={photo.id} src={photo.value} />
+          <ImageItem
+            key={photo.id}
+            src={photo.value}
+            deletePhoto={() => deletePhoto(photo.id)}
+          />
         ))}
       </div>
       <hr />
