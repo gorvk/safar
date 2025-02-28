@@ -79,13 +79,14 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
       </div>
       <hr />
       <div className="flex flex-col gap-6 my-4">
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <div className="cursor-pointer">
             <Image />
           </div>
           <div className="cursor-pointer" onClick={() => addCheckpoint()}>
             <ListUI color="fill-teal-600" />
           </div>
+          <button className="bg-teal-700 py-1 w-14 rounded-lg font-bold text-white cursor-pointer">POST</button>
         </div>
         {checkpoints.map((data, index) => (
           <CheckpointForm
