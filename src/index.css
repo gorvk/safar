@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+  --color-app-color: #017970;
+}

@@ -84,9 +84,9 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
             <Image />
           </div>
           <div className="cursor-pointer" onClick={() => addCheckpoint()}>
-            <ListUI color="fill-teal-600" />
+            <ListUI color="fill-app-color" />
           </div>
-          <button className="bg-teal-700 py-1 w-14 rounded-lg font-bold text-white cursor-pointer">POST</button>
+          <button className="bg-app-color py-1 w-14 rounded-lg font-bold text-white cursor-pointer">POST</button>
         </div>
         {checkpoints.map((data, index) => (
           <CheckpointForm

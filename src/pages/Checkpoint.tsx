@@ -56,7 +56,7 @@ export const Checkpoint = () => {
           <ul className="flex flex-col">
             {checkpointData.things_to_try.map((thing, index) => (
               <li key={index}>
-                <div className="my-1 bg-teal-600 py-2 px-3 rounded-lg text-white font-medium text-lg">
+                <div className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium text-lg">
                   {thing}
                 </div>
               </li>
