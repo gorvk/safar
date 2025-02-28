@@ -27,11 +27,7 @@ export type TSupabaseConfig = {
 
 export type TUUID = `${string}-${string}-${string}-${string}-${string}`
 
-export type TCheckpointListItem = TCheckpoint & {
+export type TListItem<T> = {
     id: TUUID;
-}
-
-export type TThingsToTryListItem = {
-    id: TUUID;
-    value: string;
+    value: T;
 }

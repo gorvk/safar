@@ -1,21 +1,20 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ListUI } from "../../Icons/ListUl";
 import { Trash } from "../../Icons/Trash";
-import { TCheckpoint, TThingsToTryListItem } from "../../types";
+import { TCheckpoint, TListItem } from "../../types";
 
 export const CheckpointForm = (props: {
   data: TCheckpoint;
   deleteCheckpoint: () => void;
-  index: number;
 }) => {
-  const [thingsToTry, setThingsToTry] = useState<TThingsToTryListItem[]>(
-    props.data.things_to_try.map((value) => ({
+  const { data, deleteCheckpoint } = props;
+
+  const [thingsToTry, setThingsToTry] = useState<TListItem<string>[]>(
+    data.things_to_try.map((value) => ({
       value,
       id: crypto.randomUUID(),
     })) ?? []
   );
-
-  const ref = useRef<HTMLInputElement>(null);
 
   const addThingsToTry = () => {
     setThingsToTry([...thingsToTry, { value: "", id: crypto.randomUUID() }]);
@@ -25,25 +24,33 @@ export const CheckpointForm = (props: {
     <div className="flex flex-col gap-4 bg-teal-600 p-5 rounded-lg sm:w-1/2">
       <div className="flex w-full justify-between gap-6">
         <input
-          defaultValue={props.data.title}
+          defaultValue={data.title}
           placeholder="Checkpoint title"
-          ref={ref}
           className="text-2xl outline-0 w-full"
         />
         <div className="cursor-pointer" onClick={addThingsToTry}>
           <ListUI color="fill-white" />
         </div>
-        <div className="cursor-pointer" onClick={props.deleteCheckpoint}>
+        <div className="cursor-pointer" onClick={deleteCheckpoint}>
           <Trash />
         </div>
       </div>
-      <input placeholder="Time picker" className="text-2xl outline-0" />
+      <input
+        defaultValue={data.location_url}
+        placeholder="Location URL"
+        className="text-lg outline-0 w-full"
+      />
+      <input
+        placeholder="Time picker"
+        defaultValue={data.visited_at}
+        className="text-lg outline-0"
+      />
       {thingsToTry.map((data) => (
         <input
           key={data.id}
           defaultValue={data.value}
           placeholder="Things to try"
-          className="text-2xl outline-0"
+          className="text-lg outline-0"
         />
       ))}
     </div>

@@ -2,13 +2,21 @@ import { useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import { TCheckpointListItem, TItineraryDetail } from "../../types";
+import { TCheckpoint, TItineraryDetail, TListItem } from "../../types";
+import { ImageItem } from "./ImageItem";
 
 export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
   const { data } = props;
-  const [checkpoints, setCheckpoints] = useState<TCheckpointListItem[]>(
-    data?.checkpoints.map((checkpoint) => ({
-      ...checkpoint,
+  const [checkpoints, setCheckpoints] = useState<TListItem<TCheckpoint>[]>(
+    data?.checkpoints.map((value) => ({
+      value,
+      id: crypto.randomUUID(),
+    })) ?? []
+  );
+
+  const [photos] = useState<TListItem<string>[]>(
+    data?.photos.map((value) => ({
+      value,
       id: crypto.randomUUID(),
     })) ?? []
   );
@@ -18,11 +26,13 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
       ...checkpoints,
       {
         id: crypto.randomUUID(),
-        things_to_try: [],
-        location_url: "",
-        title: "",
-        visited_at: "",
-      } as TCheckpointListItem,
+        value: {
+          things_to_try: [],
+          location_url: "",
+          title: "",
+          visited_at: "",
+        },
+      } as TListItem<TCheckpoint>,
     ]);
   };
 
@@ -41,18 +51,23 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
         <input
           defaultValue={data?.source}
           placeholder="Source"
-          className="text-2xl outline-0"
+          className="text-xl outline-0"
         />
         <input
           defaultValue={data?.destination}
           placeholder="Destination"
-          className="text-2xl outline-0"
+          className="text-xl outline-0"
         />
         <input
           defaultValue={data?.uploaded_duration}
           placeholder="Journey date"
-          className="text-2xl outline-0"
+          className="text-xl outline-0"
         />
+      </div>
+      <div className="flex items-baseline w-full overflow-x-auto gap-4 p-2">
+        {photos.map((photo) => (
+          <ImageItem key={photo.id} src={photo.value} />
+        ))}
       </div>
       <hr />
       <div className="flex flex-col gap-6 my-4">
@@ -67,8 +82,7 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
         {checkpoints.map((data, index) => (
           <CheckpointForm
             key={data.id}
-            index={index}
-            data={data}
+            data={data.value}
             deleteCheckpoint={() => deleteCheckpoint(index)}
           />
         ))}
