@@ -8,7 +8,7 @@ import { CheckpointList } from "../components/Checkpoint/CheckpointList";
 import { Spinner } from "../Icons/Spinner";
 import { ImageGrid } from "../components/ImageGrid/ImageGrid";
 
-export const Detail = () => {
+export const View = () => {
   const { id } = useParams();
   const [data, setData] = useState<TItineraryDetail>();
 
