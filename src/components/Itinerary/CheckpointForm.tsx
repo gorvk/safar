@@ -4,13 +4,14 @@ import { Trash } from "../../Icons/Trash";
 import { TCheckpoint, TListItem } from "../../types";
 
 export const CheckpointForm = (props: {
-  data: TCheckpoint;
+  data: TListItem<TCheckpoint>;
   deleteCheckpoint: () => void;
 }) => {
   const { data, deleteCheckpoint } = props;
+  const { id, value: checkpoint } = data;
 
   const [thingsToTry, setThingsToTry] = useState<TListItem<string>[]>(
-    data.things_to_try.map((value) => ({
+    checkpoint.things_to_try.map((value) => ({
       value,
       id: crypto.randomUUID(),
     })) ?? []
@@ -24,8 +25,9 @@ export const CheckpointForm = (props: {
     <div className="flex flex-col gap-4 bg-app-color text-white p-5 rounded-lg sm:w-1/2">
       <div className="flex w-full justify-between gap-6">
         <input
-          defaultValue={data.title}
+          defaultValue={checkpoint.title}
           placeholder="Checkpoint title"
+          name={id +"/title"}
           className="text-2xl outline-0 w-full"
         />
         <div className="cursor-pointer" onClick={addThingsToTry}>
@@ -36,20 +38,23 @@ export const CheckpointForm = (props: {
         </div>
       </div>
       <input
-        defaultValue={data.location_url}
+        defaultValue={checkpoint.location_url}
         placeholder="Location URL"
+        name={id +"/location_url"}
         className="text-lg outline-0 w-full"
       />
       <input
         placeholder="Time picker"
-        defaultValue={data.visited_at}
+        defaultValue={checkpoint.visited_at}
+        name={id +"/visited_at"}
         className="text-lg outline-0"
       />
-      {thingsToTry.map((data) => (
+      {thingsToTry.map((thing) => (
         <input
-          key={data.id}
-          defaultValue={data.value}
+          key={thing.id}
+          defaultValue={thing.value}
           placeholder="Things to try"
+          name={id +"/things_to_try"}
           className="text-lg outline-0"
         />
       ))}

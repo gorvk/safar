@@ -4,11 +4,12 @@ import { View } from "./pages/View";
 import { Checkpoint } from "./pages/Checkpoint";
 import { AddItinerary } from "./pages/AddItinerary";
 import { EditItinerary } from "./pages/EditItinerary";
+import { action } from "./components/Itinerary/ItineraryForm";
 
 const routes: RouteObject[] = [
   { path: "/", element: <Home /> },
-  { path: "add", element: <AddItinerary /> },
-  { path: ":id/edit", element: <EditItinerary /> },
+  { path: "add", element: <AddItinerary />, action: action },
+  { path: ":id/edit", element: <EditItinerary />, action: action },
   { path: ":id/view", element: <View /> },
   { path: ":id/:checkpointId/view", element: <Checkpoint /> },
 ];
