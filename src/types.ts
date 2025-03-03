@@ -1,4 +1,4 @@
-export type TItineraryFeed = {
+export type TItineraryFeedDTO = {
     id: string;
     title: string;
     user_id: string;
@@ -8,7 +8,8 @@ export type TItineraryFeed = {
     uploaded_duration: string;
 }
 
-export type TItineraryDetail = TItineraryFeed & {
+export type TItineraryDetailDTO = TItineraryFeedDTO & {
+    feed_id: string,
     checkpoints: TCheckpoint[];
     photos: string[];
 }

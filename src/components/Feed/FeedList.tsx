@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { getItineraryFeedDataSF } from "../../svc/feed";
-import { TItineraryFeed } from "../../types";
+import { TItineraryFeedDTO } from "../../types";
 import { FeedItem } from "./FeedItem";
 import { Spinner } from "../../Icons/Spinner";
 
 export const FeedList = () => {
-  const [feedData, setFeedData] = useState<TItineraryFeed[]>();
+  const [feedData, setFeedData] = useState<TItineraryFeedDTO[]>();
   const getData = async () => {
     const data = await getItineraryFeedDataSF();
     setFeedData(data);

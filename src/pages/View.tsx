@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { getItineraryDetailDataSF } from "../svc/feed";
-import { TItineraryDetail } from "../types";
+import { TItineraryDetailDTO } from "../types";
 import { useEffect, useState } from "react";
 import { SourceDestinationBar } from "../components/SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
@@ -10,7 +10,7 @@ import { ImageGrid } from "../components/ImageGrid/ImageGrid";
 
 export const View = () => {
   const { id } = useParams();
-  const [data, setData] = useState<TItineraryDetail>();
+  const [data, setData] = useState<TItineraryDetailDTO>();
 
   const getItineraryDetailData = async () => {
     if (id) {

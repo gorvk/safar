@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { TItineraryFeed } from "../../types";
+import { TItineraryFeedDTO } from "../../types";
 import { SourceDestinationBar } from "../SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../MetadataBar/MetadataBar";
 
-export const FeedItem = (props: { data: TItineraryFeed }) => {
+export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
   const { data } = props;
   const navigate = useNavigate();
 

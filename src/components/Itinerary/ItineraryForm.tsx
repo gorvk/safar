@@ -2,7 +2,13 @@ import { useRef, useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import { TCheckpoint, TItineraryDetail, TListItem, TUUID } from "../../types";
+import {
+  TCheckpoint,
+  TItineraryDetailDTO,
+  TItineraryFeedDTO,
+  TListItem,
+  TUUID,
+} from "../../types";
 import { ImageItem } from "./ImageItem";
 import { ActionFunctionArgs, Form } from "react-router-dom";
 import { db } from "../../supabase";
@@ -10,20 +16,56 @@ import { db } from "../../supabase";
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const payload = getFormDataPayload(formData);
-  const photos = formData.getAll("photos") as File[];
-  for (const photo of photos) {
-    await db.storage.from("itinerary-images").upload(photo.name, photo);
-    const { data } = await db.storage.from('itinerary-images').getPublicUrl(photo.name);
-    payload.photos = payload.photos ? [data.publicUrl] : [...payload.photos, data.publicUrl];
+  const photoFiles = formData.getAll("photos") as File[];
+  const photoURLs: string[] = [];
+
+  for (const photo of photoFiles) {
+    const resourceName = crypto.randomUUID() + photo.name;
+    await db.storage.from("itinerary-images").upload(resourceName, photo);
+    const { data } = await db.storage
+      .from("itinerary-images")
+      .getPublicUrl(resourceName);
+    photoURLs.push(data.publicUrl);
   }
+  payload.photos = [
+    ...photoURLs,
+    ...JSON.parse(formData.get("exisiting_photos") as string),
+  ];
+  const { checkpoints, destination, photos, source, title, uploaded_duration } =
+    payload;
+
+  const feedData: Partial<TItineraryFeedDTO> = {
+    destination,
+    source,
+    thumbnail_url: photoURLs[0],
+    title,
+    uploaded_duration,
+    user_id: "user1",
+  };
+
+  const insertedFeedData = await db
+    .from("itinerary_feed")
+    .insert(feedData)
+    .select();
+
+  const detailData: Partial<TItineraryDetailDTO> = {
+    photos,
+    checkpoints,
+    feed_id: insertedFeedData.data?.[0]["id"],
+  };
+
+  await db.from("itinerary_detail").insert(detailData);
   return null;
 }
 
 const getFormDataPayload = (formData: FormData) => {
   const checkpointMap: Record<string, TCheckpoint> = {};
-  const payload: Record<keyof TItineraryDetail, TItineraryDetail[keyof TItineraryDetail]> = {} as TItineraryDetail;
+  const payload: Record<
+    keyof TItineraryDetailDTO,
+    TItineraryDetailDTO[keyof TItineraryDetailDTO]
+  > = {} as TItineraryDetailDTO;
   for (const entry of formData.entries()) {
-    const control = entry[0] as keyof TItineraryDetail;
+    const control = entry[0] as keyof TItineraryDetailDTO;
     const controlValue = entry[1];
     const controlMetadata = control.split("/");
     const id = controlMetadata[0];
@@ -32,7 +74,9 @@ const getFormDataPayload = (formData: FormData) => {
     if (id && name) {
       if (current) {
         if (name === "things_to_try") {
-          current[name] = current[name] ? [...current[name], String(controlValue)] : [String(controlValue)];
+          current[name] = current[name]
+            ? [...current[name], String(controlValue)]
+            : [String(controlValue)];
         } else {
           current[name] = String(controlValue);
         }
@@ -50,10 +94,10 @@ const getFormDataPayload = (formData: FormData) => {
     }
   }
   payload["checkpoints"] = Object.values(checkpointMap);
-  return payload as TItineraryDetail;
+  return payload as TItineraryDetailDTO;
 };
 
-export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
+export const ItineraryForm = (props: { data?: TItineraryDetailDTO & TItineraryFeedDTO }) => {
   const { data } = props;
   const [checkpoints, setCheckpoints] = useState<TListItem<TCheckpoint>[]>(
     data?.checkpoints?.map((value) => ({
@@ -121,6 +165,12 @@ export const ItineraryForm = (props: { data?: TItineraryDetail }) => {
             placeholder="Journey date"
             name="uploaded_duration"
             className="text-xl outline-0"
+          />
+          <input
+            readOnly
+            className="hidden"
+            value={JSON.stringify(data?.photos)}
+            name="exisiting_photos"
           />
         </div>
         <div className="flex items-baseline w-full overflow-x-auto gap-4 p-2">

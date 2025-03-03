@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 import { ItineraryForm } from "../components/Itinerary/ItineraryForm";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
-import { TItineraryDetail } from "../types";
+import { TItineraryDetailDTO } from "../types";
 import { Spinner } from "../Icons/Spinner";
 
 export const EditItinerary = () => {
   const { id } = useParams();
-  const [data, setData] = useState<TItineraryDetail>();
+  const [data, setData] = useState<TItineraryDetailDTO>();
 
   const getItineraryDetailData = async () => {
     if (id) {
