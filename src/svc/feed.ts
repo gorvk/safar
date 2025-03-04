@@ -1,5 +1,5 @@
 import { db } from "../supabase";
-import { TItineraryDetailDTO, TItineraryFeedDTO } from "../types";
+import { TItineraryFeedDTO, TItineraryView } from "../types";
 
 export const getItineraryFeedDataSF = async (): Promise<TItineraryFeedDTO[]> => {
     const { data, error } = await db.from('itinerary_feed').select()
@@ -12,13 +12,13 @@ export const getItineraryFeedDataSF = async (): Promise<TItineraryFeedDTO[]> => 
     return data as TItineraryFeedDTO[];
 };
 
-export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryDetailDTO> => {
+export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryView> => {
     const { data, error } = await db.from("itinerary_feed").select("*, ...itinerary_detail(*)").eq("id", id);
     
     if (error) {
         console.error(error);
-        return {} as TItineraryDetailDTO;
+        return {} as TItineraryView;
     }
 
-    return data[0] as TItineraryDetailDTO;
+    return data[0] as TItineraryView;
 };

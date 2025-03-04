@@ -4,7 +4,7 @@ import { View } from "./pages/View";
 import { Checkpoint } from "./pages/Checkpoint";
 import { AddItinerary } from "./pages/AddItinerary";
 import { EditItinerary } from "./pages/EditItinerary";
-import { action } from "./components/Itinerary/ItineraryForm";
+import { action } from "./components/Itinerary/ItineraryFormAction";
 
 const routes: RouteObject[] = [
   { path: "/", element: <Home /> },

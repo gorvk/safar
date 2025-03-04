@@ -4,8 +4,9 @@ import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
 import {
   TCheckpoint,
-  TItineraryDetailDTO,
+  TItineraryDetail,
   TItineraryFeedDTO,
+  TItineraryView,
   TListItem,
   TUUID,
 } from "../../types";
@@ -13,91 +14,7 @@ import { ImageItem } from "./ImageItem";
 import { ActionFunctionArgs, Form } from "react-router-dom";
 import { db } from "../../supabase";
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const payload = getFormDataPayload(formData);
-  const photoFiles = formData.getAll("photos") as File[];
-  const photoURLs: string[] = [];
-
-  for (const photo of photoFiles) {
-    const resourceName = crypto.randomUUID() + photo.name;
-    await db.storage.from("itinerary-images").upload(resourceName, photo);
-    const { data } = await db.storage
-      .from("itinerary-images")
-      .getPublicUrl(resourceName);
-    photoURLs.push(data.publicUrl);
-  }
-  payload.photos = [
-    ...photoURLs,
-    ...JSON.parse(formData.get("exisiting_photos") as string),
-  ];
-  const { checkpoints, destination, photos, source, title, uploaded_duration } =
-    payload;
-
-  const feedData: Partial<TItineraryFeedDTO> = {
-    destination,
-    source,
-    thumbnail_url: photoURLs[0],
-    title,
-    uploaded_duration,
-    user_id: "user1",
-  };
-
-  const insertedFeedData = await db
-    .from("itinerary_feed")
-    .insert(feedData)
-    .select();
-
-  const detailData: Partial<TItineraryDetailDTO> = {
-    photos,
-    checkpoints,
-    feed_id: insertedFeedData.data?.[0]["id"],
-  };
-
-  await db.from("itinerary_detail").insert(detailData);
-  return null;
-}
-
-const getFormDataPayload = (formData: FormData) => {
-  const checkpointMap: Record<string, TCheckpoint> = {};
-  const payload: Record<
-    keyof TItineraryDetailDTO,
-    TItineraryDetailDTO[keyof TItineraryDetailDTO]
-  > = {} as TItineraryDetailDTO;
-  for (const entry of formData.entries()) {
-    const control = entry[0] as keyof TItineraryDetailDTO;
-    const controlValue = entry[1];
-    const controlMetadata = control.split("/");
-    const id = controlMetadata[0];
-    const name = controlMetadata[1] as keyof TCheckpoint;
-    let current = checkpointMap[id];
-    if (id && name) {
-      if (current) {
-        if (name === "things_to_try") {
-          current[name] = current[name]
-            ? [...current[name], String(controlValue)]
-            : [String(controlValue)];
-        } else {
-          current[name] = String(controlValue);
-        }
-      } else {
-        if (name === "things_to_try") {
-          current = { [name]: [String(controlValue)] } as TCheckpoint;
-        } else {
-          current = {} as TCheckpoint;
-          current[name] = String(controlValue);
-        }
-      }
-      checkpointMap[id] = current;
-    } else {
-      payload[control] = String(controlValue);
-    }
-  }
-  payload["checkpoints"] = Object.values(checkpointMap);
-  return payload as TItineraryDetailDTO;
-};
-
-export const ItineraryForm = (props: { data?: TItineraryDetailDTO & TItineraryFeedDTO }) => {
+export const ItineraryForm = (props: { data?: TItineraryView }) => {
   const { data } = props;
   const [checkpoints, setCheckpoints] = useState<TListItem<TCheckpoint>[]>(
     data?.checkpoints?.map((value) => ({

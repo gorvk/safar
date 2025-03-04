@@ -1,5 +1,5 @@
-export type TItineraryFeedDTO = {
-    id: string;
+
+export type TItineraryFeed = {
     title: string;
     user_id: string;
     thumbnail_url: string;
@@ -8,11 +8,22 @@ export type TItineraryFeedDTO = {
     uploaded_duration: string;
 }
 
-export type TItineraryDetailDTO = TItineraryFeedDTO & {
-    feed_id: string,
+export type TItineraryDetail = {
+    feed_id: string;
     checkpoints: TCheckpoint[];
     photos: string[];
+};
+
+export type TItineraryDetailDTO = TItineraryDetail & {
+    id: string;
 }
+
+export type TItineraryFeedDTO =  TItineraryFeed & {
+    id: string;
+}
+
+export type TItineraryView = TItineraryDetailDTO & TItineraryFeedDTO;
+
 
 export type TCheckpoint = {
     title: string;
