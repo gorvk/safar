@@ -5,7 +5,7 @@ import {
   TCheckpoint,
   TItineraryView,
 } from "../../types";
-import { addItinerary } from "../../svc/itineraryForm";
+import { addItinerary, editItinerary } from "../../svc/itineraryForm";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -19,10 +19,14 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   };
 
   const urlParts = request.url.split("/");
-  console.log(urlParts[urlParts.length - 1]);
-  console.log(params["id"]);
+  const formType = urlParts[urlParts.length - 1];
 
-  await addItinerary(payload)
+  if (formType === "add") {
+    await addItinerary(payload)
+  } else if (formType === "edit" && params["id"]) {
+    await editItinerary(payload, params["id"])
+  }
+
   return null;
 };
 

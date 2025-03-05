@@ -2,17 +2,9 @@ import { useRef, useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import {
-  TCheckpoint,
-  TItineraryDetail,
-  TItineraryFeedDTO,
-  TItineraryView,
-  TListItem,
-  TUUID,
-} from "../../types";
+import { TCheckpoint, TItineraryView, TListItem, TUUID } from "../../types";
 import { ImageItem } from "./ImageItem";
-import { ActionFunctionArgs, Form } from "react-router-dom";
-import { db } from "../../supabase";
+import { Form } from "react-router-dom";
 
 export const ItineraryForm = (props: { data?: TItineraryView }) => {
   const { data } = props;
@@ -53,6 +45,20 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
 
   const deletePhoto = (id: TUUID) => {
     setPhotos(photos.filter((value) => value.id !== id));
+  };
+
+  const getSelectedFileUrls = (files: FileList | null) => {
+    if (files) {
+      const newPhotos: TListItem<string>[] = [];
+      for (const file of files) {
+        const url = URL.createObjectURL(file);
+        newPhotos.push({
+          id: crypto.randomUUID(),
+          value: url,
+        });
+      }
+      setPhotos([...photos, ...newPhotos]);
+    }
   };
 
   return (
@@ -110,6 +116,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
                 type="file"
                 accept="image"
                 name="photos"
+                onChange={(event) => getSelectedFileUrls(event.target.files)}
                 multiple={true}
               />
               <Image />

@@ -14,6 +14,20 @@ export const addItinerary = async (payload: TItineraryView): Promise<void> => {
     }
 }
 
+export const editItinerary = async (payload: TItineraryView, id: string): Promise<void> => {
+  const feedData: TItineraryFeed = getFeedDataPayload(payload);
+  const { data, error } = await db
+      .from("itinerary_feed")
+      .update(feedData)
+      .eq('id', id)
+      .select<"*", TItineraryFeedDTO>();
+
+  if (!error) {
+      const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
+      await db.from("itinerary_detail").update(detailData).eq('feed_id', id);
+  }
+}
+
 const getDetailDataPayload = (
   payload: TItineraryView,
   feedData: TItineraryFeedDTO
