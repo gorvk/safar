@@ -1,50 +1,44 @@
 import { ActionFunctionArgs } from "react-router-dom";
 import { db } from "../../supabase";
-import {
-  TItineraryDetail,
-  TCheckpoint,
-  TItineraryView,
-} from "../../types";
+import { TItineraryDetail, TCheckpoint, TItineraryView } from "../../types";
 import { addItinerary, editItinerary } from "../../svc/itineraryForm";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const photoFiles = formData.getAll("photos") as File[];
+  const photos = JSON.parse(String(formData.get("exisiting_photos"))) as string[];
   const payload: TItineraryView = {
     ...getFormDataPayload(formData),
-    photos: await getPhotoUrls(
-      photoFiles,
-      String(formData.get("exisiting_photos"))
-    ),
+    photos: await getPhotoUrls(photos),
   };
 
   const urlParts = request.url.split("/");
   const formType = urlParts[urlParts.length - 1];
 
   if (formType === "add") {
-    await addItinerary(payload)
+    await addItinerary(payload);
   } else if (formType === "edit" && params["id"]) {
-    await editItinerary(payload, params["id"])
+    await editItinerary(payload, params["id"]);
   }
 
   return null;
 };
 
-const getPhotoUrls = async (
-  newPhotos: File[],
-  exisitingPhotos: string
-): Promise<string[]> => {
+const getPhotoUrls = async (photos: string[]): Promise<string[]> => {
   const photoURLs: string[] = [];
-  for (const photo of newPhotos) {
-    const resourceName = crypto.randomUUID() + photo.name;
-    await db.storage.from("itinerary-images").upload(resourceName, photo);
-    const { data } = await db.storage
-      .from("itinerary-images")
-      .getPublicUrl(resourceName);
-    photoURLs.push(data.publicUrl);
+  for (const photo of photos) {
+    let current = photo;
+    if (photo.split(":")[0] === "blob") {
+      const blob = await fetch(current).then((r) => r.blob());
+      const resourceName = crypto.randomUUID();
+      await db.storage.from("itinerary-images").upload(resourceName, blob);
+      const { data } = await db.storage
+        .from("itinerary-images")
+        .getPublicUrl(resourceName);
+      current = data.publicUrl;
+    }
+    photoURLs.push(current);
   }
-
-  return [...photoURLs, ...JSON.parse(exisitingPhotos)];
+  return photoURLs;
 };
 
 const getFormDataPayload = (formData: FormData) => {

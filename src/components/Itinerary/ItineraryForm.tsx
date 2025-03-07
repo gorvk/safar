@@ -92,7 +92,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
           <input
             readOnly
             className="hidden"
-            value={JSON.stringify(data?.photos)}
+            value={JSON.stringify(photos.map(r => r.value))}
             name="exisiting_photos"
           />
         </div>
