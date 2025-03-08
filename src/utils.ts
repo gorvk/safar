@@ -1,4 +1,4 @@
-import { pageSize } from "./constants";
+import { debounceTimeInMS, pageSize } from "./constants";
 
 export const getDate = (timeStamp: string) => {
     const date = new Date(timeStamp);
@@ -19,7 +19,7 @@ export const debounce = <T>(
     let ref: NodeJS.Timeout;
     return (event: T) => {
         clearTimeout(ref);
-        ref = setTimeout(() => cb(event), 1000);
+        ref = setTimeout(() => cb(event), debounceTimeInMS);
     };
 };
 
