@@ -1,3 +1,4 @@
+import { User } from "@supabase/auth-js";
 
 export type TItineraryFeed = {
     title: string;
@@ -44,7 +45,7 @@ export type TListItem<T> = {
     value: T;
 }
 
-export type FeedState = {
+export type TFeedState = {
     data?: TItineraryFeedDTO[];
     searchQuery: string;
     loader: boolean;
@@ -52,6 +53,12 @@ export type FeedState = {
     pageNumber: number;
 }
 
+export type TAuthState = {
+    user: User | null;
+}
+
 export type TAppContext = {
-    feedState: [FeedState, React.Dispatch<FeedState>];
+    appLoader: [boolean, React.Dispatch<boolean>];
+    feedState: [TFeedState, React.Dispatch<TFeedState>];
+    authState: [TAuthState, React.Dispatch<TAuthState>];
 }
