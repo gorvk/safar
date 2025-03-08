@@ -1,21 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { getItineraryFeedDataSF } from "../../svc/feed";
-import { TItineraryFeedDTO } from "../../types";
 import { FeedItem } from "./FeedItem";
 import { Spinner } from "../../Icons/Spinner";
+import { AppContext } from "../../context";
 
 export const FeedList = () => {
-  const [feedData, setFeedData] = useState<TItineraryFeedDTO[]>();
+  const [feedState, setFeedState] = useContext(AppContext).feedState;
+
   const getData = async () => {
-    const data = await getItineraryFeedDataSF();
-    setFeedData(data);
+    setFeedState({ ...feedState, loader: true });
+    const { data, count } = await getItineraryFeedDataSF();
+    setFeedState({ ...feedState, data, count: count, loader: false });
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  if (!feedData) return <Spinner />;
+  if (feedState.loader) return <Spinner />;
 
-  return feedData.map((data) => <FeedItem data={data} key={data.id} />);
+  return feedState.data?.map((item) => <FeedItem data={item} key={item.id} />);
 };

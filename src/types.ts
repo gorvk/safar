@@ -18,7 +18,7 @@ export type TItineraryDetailDTO = TItineraryDetail & {
     id: string;
 }
 
-export type TItineraryFeedDTO =  TItineraryFeed & {
+export type TItineraryFeedDTO = TItineraryFeed & {
     id: string;
 }
 
@@ -42,4 +42,16 @@ export type TUUID = `${string}-${string}-${string}-${string}-${string}`
 export type TListItem<T> = {
     id: TUUID;
     value: T;
+}
+
+export type FeedState = {
+    data?: TItineraryFeedDTO[];
+    searchQuery: string;
+    loader: boolean;
+    count: number;
+    pageNumber: number;
+}
+
+export type TAppContext = {
+    feedState: [FeedState, React.Dispatch<FeedState>];
 }

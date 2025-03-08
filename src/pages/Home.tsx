@@ -1,6 +1,7 @@
 import { SearchBar } from "../components/Search/SearchBar";
 import { FeedList } from "../components/Feed/FeedList";
 import { AddItineraryButton } from "../components/Itinerary/AddItineraryButton";
+import { Paginator } from "../components/Feed/Paginator";
 
 export const Home = () => {
   return (
@@ -10,6 +11,7 @@ export const Home = () => {
         <AddItineraryButton />
       </div>
       <FeedList />
+      <Paginator />
     </div>
   );
 };

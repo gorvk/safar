@@ -1,3 +1,4 @@
+import { pageSize } from "./constants";
 
 export const getDate = (timeStamp: string) => {
     const date = new Date(timeStamp);
@@ -10,4 +11,21 @@ export const getDate = (timeStamp: string) => {
 export const getTime = (timeStamp: string) => {
     const date = new Date(timeStamp);
     return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+}
+
+export const debounce = <T>(
+    cb: (event: T) => void
+) => {
+    let ref: NodeJS.Timeout;
+    return (event: T) => {
+        clearTimeout(ref);
+        ref = setTimeout(() => cb(event), 1000);
+    };
+};
+
+export const getPaginatationIndex = (pageNumber?: number) => {
+    const page = pageNumber || 0;
+    const start = page * pageSize;
+    const end = start + pageSize;
+    return { start, end }
 }

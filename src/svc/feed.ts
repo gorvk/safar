@@ -1,20 +1,24 @@
 import { db } from "../supabase";
 import { TItineraryFeedDTO, TItineraryView } from "../types";
+import { getPaginatationIndex } from "../utils";
 
-export const getItineraryFeedDataSF = async (): Promise<TItineraryFeedDTO[]> => {
-    const { data, error } = await db.from('itinerary_feed').select()
+export const getItineraryFeedDataSF = async (pageNumber?: number): Promise<{ data: TItineraryFeedDTO[], count: number }> => {
+    const { start, end } = getPaginatationIndex(pageNumber);
+    const { data, count, error } = await db.from('itinerary_feed')
+        .select<"*", TItineraryFeedDTO>("*", { count: 'exact' })
+        .range(start, end - 1);
 
-    if (error) {
+    if (error || !count) {
         console.error(error);
-        return [];
+        return { data: [], count: 0 };
     }
 
-    return data as TItineraryFeedDTO[];
+    return { data, count };
 };
 
 export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryView> => {
     const { data, error } = await db.from("itinerary_feed").select("*, ...itinerary_detail(*)").eq("id", id);
-    
+
     if (error) {
         console.error(error);
         return {} as TItineraryView;
@@ -22,3 +26,18 @@ export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryVi
 
     return data[0] as TItineraryView;
 };
+
+export const searchFeedSF = async (query: string, pageNumber?: number): Promise<{ data: TItineraryFeedDTO[], count: number }> => {
+    const { start, end } = getPaginatationIndex(pageNumber);
+    const { data, error, count } = await db.from("itinerary_feed")
+        .select<"*", TItineraryFeedDTO>("*", { count: 'exact' })
+        .textSearch("itinerary_feed_search", query).range(start, end - 1);
+
+    if (error || !count) {
+        console.error(error);
+        return { data: [], count: 0 };
+    }
+
+    return { data, count };
+}
+
