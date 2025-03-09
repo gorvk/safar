@@ -4,6 +4,7 @@ import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
 import { TItineraryView } from "../types";
 import { Spinner } from "../Icons/Spinner";
+import { getDate } from "../utils";
 
 export const EditItinerary = () => {
   const { id } = useParams();
@@ -11,7 +12,12 @@ export const EditItinerary = () => {
 
   const getItineraryDetailData = async () => {
     if (id) {
-      const detailData = await getItineraryDetailDataSF(id);
+      let detailData = await getItineraryDetailDataSF(id);
+      detailData.uploaded_duration = getDate(detailData.uploaded_duration);
+      detailData.checkpoints = detailData.checkpoints.map((checkpoint) => ({
+        ...checkpoint,
+        visited_at: getDate(checkpoint.visited_at),
+      }));
       setData(detailData);
     }
   };

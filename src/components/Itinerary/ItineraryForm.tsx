@@ -5,6 +5,7 @@ import { CheckpointForm } from "./CheckpointForm";
 import { TCheckpoint, TItineraryView, TListItem, TUUID } from "../../types";
 import { ImageItem } from "./ImageItem";
 import { Form } from "react-router-dom";
+import { Datepicker } from "./Datepicker";
 
 export const ItineraryForm = (props: { data?: TItineraryView }) => {
   const { data } = props;
@@ -83,16 +84,16 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
             name="destination"
             className="text-xl outline-0"
           />
-          <input
+          <Datepicker
             defaultValue={data?.uploaded_duration}
             placeholder="Journey date"
             name="uploaded_duration"
-            className="text-xl outline-0"
+            fontSize="text-xl"
           />
           <input
             readOnly
             className="hidden"
-            value={JSON.stringify(photos.map(r => r.value))}
+            value={JSON.stringify(photos.map((r) => r.value))}
             name="exisiting_photos"
           />
         </div>

@@ -2,8 +2,13 @@ import { debounceTimeInMS, pageSize } from "./constants";
 
 export const getDate = (timeStamp: string) => {
     const date = new Date(timeStamp);
-    return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+    const day = getZeroedNumber(date.getDate()); 
+    const year = getZeroedNumber(date.getFullYear()); 
+    const month = getZeroedNumber(date.getMonth() + 1); 
+    return year + "-" + month + "-" + day
 }
+
+export const getZeroedNumber = (num: number): string => num < 10 ? "0" + num : num.toString(); 
 
 // timeStamp -> toISOString()
 // from userInput: new Date('2024-09-10, 13:01').toISOString()

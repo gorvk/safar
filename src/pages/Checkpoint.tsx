@@ -20,6 +20,7 @@ export const Checkpoint = () => {
         const detailData = await getItineraryDetailDataSF(id);
         data = detailData.checkpoints[parseInt(checkpointId)];
       }
+      data.things_to_try = data.things_to_try || []; 
       setCheckpointData(data);
     }
   };

@@ -1,30 +1,32 @@
+import { User } from "@supabase/supabase-js";
 import { db } from "../supabase";
 import { TItineraryFeed, TItineraryFeedDTO, TItineraryDetail, TItineraryView } from "../types";
+import { getUser } from "./auth";
 
 export const addItinerary = async (payload: TItineraryView): Promise<void> => {
-    const feedData: TItineraryFeed = getFeedDataPayload(payload);
-    const { data, error } = await db
-        .from("itinerary_feed")
-        .insert(feedData)
-        .select<"*", TItineraryFeedDTO>();
+  const feedData: TItineraryFeed = await getFeedDataPayload(payload);
+  const { data, error } = await db
+    .from("itinerary_feed")
+    .insert(feedData)
+    .select<"*", TItineraryFeedDTO>();
 
-    if (!error) {
-        const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
-        await db.from("itinerary_detail").insert(detailData);
-    }
+  if (!error) {
+    const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
+    await db.from("itinerary_detail").insert(detailData);
+  }
 }
 
 export const editItinerary = async (payload: TItineraryView, id: string): Promise<void> => {
-  const feedData: TItineraryFeed = getFeedDataPayload(payload);
+  const feedData: TItineraryFeed = await getFeedDataPayload(payload);
   const { data, error } = await db
-      .from("itinerary_feed")
-      .update(feedData)
-      .eq('id', id)
-      .select<"*", TItineraryFeedDTO>();
+    .from("itinerary_feed")
+    .update(feedData)
+    .eq('id', id)
+    .select<"*", TItineraryFeedDTO>();
 
   if (!error) {
-      const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
-      await db.from("itinerary_detail").update(detailData).eq('feed_id', id);
+    const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
+    await db.from("itinerary_detail").update(detailData).eq('feed_id', id);
   }
 }
 
@@ -40,14 +42,15 @@ const getDetailDataPayload = (
   };
 };
 
-const getFeedDataPayload = (payload: TItineraryView): TItineraryFeed => {
+const getFeedDataPayload = async (payload: TItineraryView): Promise<TItineraryFeed> => {
   const { destination, source, title, uploaded_duration } = payload;
+  const user_id = (await getUser())?.id || "";
   return {
     destination,
     source,
-    thumbnail_url: payload.photos[0],
+    user_id,
     title,
-    uploaded_duration,
-    user_id: "user1",
+    thumbnail_url: payload.photos[0],
+    uploaded_duration: new Date(uploaded_duration).toISOString(),
   };
 };

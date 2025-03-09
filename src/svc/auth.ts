@@ -10,20 +10,20 @@ export const googleAuth = async (): Promise<User | null> => {
         return null;
     }
 
-    const {
-        data: { user },
-    } = await db.auth.getUser();
-
+    const user = await getUser();
     return user;
-
 };
 
 export const logout = async (): Promise<User | null> => {
-    await db.auth.signOut()
+    await db.auth.signOut();
+    const user = await getUser();
+    return user;
+};
 
+export const getUser = async (): Promise<User | null> => {
     const {
         data: { user },
     } = await db.auth.getUser();
 
     return user;
-};
+}

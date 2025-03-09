@@ -3,11 +3,11 @@ import { router } from "./router";
 import { AppContext } from "./context";
 import { useEffect, useState } from "react";
 import { TAuthState, TFeedState } from "./types";
-import { db } from "./supabase";
+import { getUser } from "./svc/auth";
 
 function App() {
-  const appLoader = useState<boolean>(false);
-  const authState = useState<TAuthState>({ user: null });
+  const [appLoader, setAppLoader] = useState<boolean>(false);
+  const [authState, setAuthState] = useState<TAuthState>({ user: null });
   const feedState = useState<TFeedState>({
     loader: false,
     searchQuery: "",
@@ -16,12 +16,10 @@ function App() {
   });
 
   const authInit = async () => {
-    appLoader[1](true);
-    const {
-      data: { user },
-    } = await db.auth.getUser();
-    authState[1]({ user });
-    appLoader[1](false);
+    setAppLoader(true);
+    const user = await getUser();
+    setAuthState({ user });
+    setAppLoader(false);
   };
 
   useEffect(() => {
@@ -29,7 +27,13 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{ feedState, authState, appLoader }}>
+    <AppContext.Provider
+      value={{
+        feedState,
+        authState: [authState, setAuthState],
+        appLoader: [appLoader, setAppLoader],
+      }}
+    >
       <RouterProvider router={router} />
     </AppContext.Provider>
   );
