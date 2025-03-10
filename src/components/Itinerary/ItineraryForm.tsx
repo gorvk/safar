@@ -70,26 +70,33 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
             defaultValue={data?.title}
             placeholder="Title"
             name="title"
+            required={true}
             className="text-5xl outline-0"
           />
           <input
             defaultValue={data?.source}
             placeholder="Source"
             name="source"
+            required={true}
             className="text-xl outline-0"
           />
           <input
             defaultValue={data?.destination}
             placeholder="Destination"
             name="destination"
+            required={true}
             className="text-xl outline-0"
           />
-          <Datepicker
-            defaultValue={data?.uploaded_duration}
-            placeholder="Journey date"
-            name="uploaded_duration"
-            fontSize="text-xl"
-          />
+          <div className="max-w-60">
+            <Datepicker
+              labelBackground="bg-white"
+              required={true}
+              defaultValue={data?.uploaded_duration}
+              placeholder="Journey date"
+              name="uploaded_duration"
+              fontSize="text-xl"
+            />
+          </div>
           <input
             readOnly
             className="hidden"

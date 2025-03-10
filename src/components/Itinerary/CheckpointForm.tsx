@@ -28,6 +28,7 @@ export const CheckpointForm = (props: {
         <input
           defaultValue={checkpoint.title}
           placeholder="Checkpoint title"
+          required={true}
           name={id + "/title"}
           className="text-2xl outline-0 w-full placeholder-white"
         />
@@ -45,6 +46,8 @@ export const CheckpointForm = (props: {
         className="text-lg outline-0 w-full placeholder-white"
       />
       <Datepicker
+        labelBackground="bg-app-color"
+        required={true}
         defaultValue={checkpoint.visited_at}
         placeholder="Time picker"
         name={id + "/visited_at"}
