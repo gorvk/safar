@@ -27,3 +27,21 @@ export const getUser = async (): Promise<User | null> => {
 
     return user;
 }
+
+export const setUserMetadata = async (payload: { user_id: string, user_name: string }) => {
+    const { data, error } = await db.from("itinerary_user_map").select("*").eq("user_id", payload.user_id);
+
+    if (data?.length === 0 || error) {
+        await db.from("itinerary_user_map").insert(payload)
+    }
+}
+
+export const getUserMetadata = async (user_id: string) => {
+    const { data, error } = await db.from("itinerary_user_map").select("*").eq("user_id", user_id);
+
+    if (error) {
+        return user_id;
+    }
+
+    return data[0].user_name;
+}

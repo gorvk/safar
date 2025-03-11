@@ -3,7 +3,7 @@ import { router } from "./router";
 import { AppContext } from "./context";
 import { useEffect, useState } from "react";
 import { TAuthState, TFeedState } from "./types";
-import { getUser } from "./svc/auth";
+import { getUser, setUserMetadata } from "./svc/auth";
 
 function App() {
   const [appLoader, setAppLoader] = useState<boolean>(false);
@@ -19,6 +19,10 @@ function App() {
     setAppLoader(true);
     const user = await getUser();
     setAuthState({ user });
+    await setUserMetadata({
+      user_id: user?.id || "",
+      user_name: user?.identities?.[0].identity_data?.name || "",
+    });
     setAppLoader(false);
   };
 
