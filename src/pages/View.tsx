@@ -5,17 +5,21 @@ import { useEffect, useState } from "react";
 import { SourceDestinationBar } from "../components/SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
 import { CheckpointList } from "../components/Checkpoint/CheckpointList";
-import { Spinner } from "../Icons/Spinner";
 import { ImageGrid } from "../components/ImageGrid/ImageGrid";
+import { useDispatch } from "react-redux";
+import loader from "../redux/slices/loader";
 
 export const View = () => {
   const { id } = useParams();
   const [data, setData] = useState<TItineraryView>();
+  const dispatch = useDispatch();
 
   const getItineraryDetailData = async () => {
     if (id) {
+      dispatch(loader.actions.setloader(true));
       const detailData = await getItineraryDetailDataSF(id);
       setData(detailData);
+      dispatch(loader.actions.setloader(false));
     }
   };
 
@@ -23,10 +27,10 @@ export const View = () => {
     getItineraryDetailData();
   }, []);
 
-  if (!data) return <Spinner />;
+  if (!data) return <></>;
 
-  if(!data.photos) data.photos = [];
-  if(!data.checkpoints) data.checkpoints = [];
+  if (!data.photos) data.photos = [];
+  if (!data.checkpoints) data.checkpoints = [];
 
   return (
     <>
@@ -39,10 +43,16 @@ export const View = () => {
         />
         <hr />
         <div className="text-lg">
-          <SourceDestinationBar source={data.source} destination={data.destination} />
+          <SourceDestinationBar
+            source={data.source}
+            destination={data.destination}
+          />
         </div>
         <div>
-          <CheckpointList checkpoints={data.checkpoints} itineraryId={data.id} />
+          <CheckpointList
+            checkpoints={data.checkpoints}
+            itineraryId={data.id}
+          />
         </div>
       </div>
     </>

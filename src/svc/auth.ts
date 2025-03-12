@@ -1,7 +1,7 @@
 import { User } from "@supabase/auth-js";
 import { db } from "../supabase";
 
-export const googleAuth = async (): Promise<User | null> => {
+export const googleAuthSvc = async (): Promise<User | null> => {
     const { error } = await db.auth.signInWithOAuth({
         provider: "google",
     });
@@ -10,17 +10,17 @@ export const googleAuth = async (): Promise<User | null> => {
         return null;
     }
 
-    const user = await getUser();
+    const user = await getUserSvc();
     return user;
 };
 
-export const logout = async (): Promise<User | null> => {
+export const logoutSvc = async (): Promise<User | null> => {
     await db.auth.signOut();
-    const user = await getUser();
+    const user = await getUserSvc();
     return user;
 };
 
-export const getUser = async (): Promise<User | null> => {
+export const getUserSvc = async (): Promise<User | null> => {
     const {
         data: { user },
     } = await db.auth.getUser();

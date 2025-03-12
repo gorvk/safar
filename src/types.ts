@@ -48,7 +48,6 @@ export type TListItem<T> = {
 export type TFeedState = {
     data?: TItineraryFeedDTO[];
     searchQuery: string;
-    loader: boolean;
     count: number;
     pageNumber: number;
 }
@@ -57,8 +56,8 @@ export type TAuthState = {
     user: User | null;
 }
 
-export type TAppContext = {
-    appLoader: [boolean, React.Dispatch<boolean>];
-    feedState: [TFeedState, React.Dispatch<TFeedState>];
-    authState: [TAuthState, React.Dispatch<TAuthState>];
-}
+export type TAppState = {
+    loader: boolean;
+    auth: TAuthState;
+    feed: TFeedState;
+} 

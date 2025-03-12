@@ -1,7 +1,7 @@
 import { User } from "@supabase/supabase-js";
 import { db } from "../supabase";
 import { TItineraryFeed, TItineraryFeedDTO, TItineraryDetail, TItineraryView } from "../types";
-import { getUser } from "./auth";
+import { getUserSvc } from "./auth";
 
 export const addItinerary = async (payload: TItineraryView): Promise<void> => {
   const feedData: TItineraryFeed = await getFeedDataPayload(payload);
@@ -44,7 +44,7 @@ const getDetailDataPayload = (
 
 const getFeedDataPayload = async (payload: TItineraryView): Promise<TItineraryFeed> => {
   const { destination, source, title, uploaded_duration } = payload;
-  const user_id = (await getUser())?.id || "";
+  const user_id = (await getUserSvc())?.id || "";
   return {
     destination,
     source,

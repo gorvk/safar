@@ -2,20 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { TItineraryFeedDTO } from "../../types";
 import { SourceDestinationBar } from "../SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../MetadataBar/MetadataBar";
-import { useEffect, useState } from "react";
-import { getUserMetadata } from "../../svc/auth";
 
 export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
   const { data } = props;
-  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      const _userName = await getUserMetadata(data.user_id);
-      setUserName(_userName);
-    })();
-  }, []);
 
   return (
     <div
@@ -34,7 +24,7 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
           />
         </div>
         <MetadataBar
-          userId={userName}
+          userId={data.user_id}
           uploadedDuration={data.uploaded_duration}
         />
       </div>

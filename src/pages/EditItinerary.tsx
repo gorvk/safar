@@ -3,7 +3,6 @@ import { ItineraryForm } from "../components/Itinerary/ItineraryForm";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
 import { TItineraryView } from "../types";
-import { Spinner } from "../Icons/Spinner";
 import { getDate } from "../utils";
 
 export const EditItinerary = () => {
@@ -26,7 +25,7 @@ export const EditItinerary = () => {
     getItineraryDetailData();
   }, []);
 
-  if (!data) return <Spinner />;
+  if (!data) return <></>;
 
   return <ItineraryForm data={data} />;
 };

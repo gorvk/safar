@@ -1,27 +1,24 @@
-import { useContext } from "react";
-import { AppContext } from "../../context";
 import { getItineraryFeedDataSF, searchFeedSF } from "../../svc/feed";
 import { getPaginatationIndex } from "../../utils";
 import { pageSize } from "../../constants";
 import { PaginatorButton } from "./PaginatorButton";
+import { useDispatch, useSelector } from "react-redux";
+import loader from "../../redux/slices/loader";
+import { TAppState, TFeedState } from "../../types";
+import feed from "../../redux/slices/feed";
 
 export const Paginator = () => {
-  const [feedState, setFeedState] = useContext(AppContext).feedState;
+  const dispatch = useDispatch();
+  const feedState = useSelector((state: TAppState) => state.feed);
 
-  const getData = async (_pageNumber: number) => {
-    setFeedState({ ...feedState, loader: true });
-
+  const getData = async (pageNumber: number) => {
+    dispatch(loader.actions.setloader(true));
     const { data, count } = await (feedState.searchQuery
-      ? searchFeedSF(feedState.searchQuery, _pageNumber)
-      : getItineraryFeedDataSF(_pageNumber));
-
-    setFeedState({
-      ...feedState,
-      data,
-      count,
-      loader: false,
-      pageNumber: _pageNumber,
-    });
+      ? searchFeedSF(feedState.searchQuery, pageNumber)
+      : getItineraryFeedDataSF(pageNumber));
+    const newFeedState: TFeedState = { ...feedState, pageNumber, count, data };
+    dispatch(feed.actions.setFeed(newFeedState));
+    dispatch(loader.actions.setloader(false));
   };
 
   return (

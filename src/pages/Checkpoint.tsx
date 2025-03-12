@@ -4,7 +4,6 @@ import { TCheckpoint } from "../types";
 import { useLocation, useParams } from "react-router-dom";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
-import { Spinner } from "../Icons/Spinner";
 import { Location } from "../Icons/Location";
 
 export const Checkpoint = () => {
@@ -30,7 +29,7 @@ export const Checkpoint = () => {
   }, []);
 
   if (!checkpointData) {
-    return <Spinner />;
+    return <></>;
   }
 
   return (

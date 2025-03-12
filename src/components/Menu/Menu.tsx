@@ -1,16 +1,36 @@
-import { useContext, useState } from "react";
-import { AppContext } from "../../context";
+import { useState } from "react";
 import { Option } from "./Option";
-import { googleAuth, logout } from "../../svc/auth";
+import { googleAuthSvc, logoutSvc } from "../../svc/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { TAppState } from "../../types";
+import loader from "../../redux/slices/loader";
+import auth from "../../redux/slices/auth";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const appContext = useContext(AppContext);
-  const [authState, setAuthState] = appContext.authState;
-  const [_, setAppLoader] = appContext.appLoader;
+  const authState = useSelector((state: TAppState) => state.auth);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const login = () => {
+    dispatch(loader.actions.setloader(true));
+    googleAuthSvc()
+      .then((user) => dispatch(auth.actions.setAuth({ user })))
+      .finally(() => {
+        dispatch(loader.actions.setloader(false));
+      });
+  };
+
+  const logout = () => {
+    dispatch(loader.actions.setloader(true));
+    logoutSvc()
+      .then((user) => dispatch(auth.actions.setAuth({ user })))
+      .finally(() => {
+        dispatch(loader.actions.setloader(false));
+      });
   };
 
   return (
@@ -40,31 +60,11 @@ const Menu = () => {
           <ul className="flex flex-col gap-0.5">
             {!authState.user ? (
               <li>
-                <Option
-                  label="Login"
-                  handler={() => {
-                    setAppLoader(true);
-                    googleAuth()
-                      .then((user) => setAuthState({ ...authState, user }))
-                      .finally(() => {
-                        setAppLoader(false);
-                      });
-                  }}
-                />
+                <Option label="Login" handler={login} />
               </li>
             ) : (
               <li>
-                <Option
-                  label="Logout"
-                  handler={() => {
-                    setAppLoader(true);
-                    logout()
-                      .then((user) => setAuthState({ ...authState, user }))
-                      .finally(() => {
-                        setAppLoader(false);
-                      });
-                  }}
-                />
+                <Option label="Logout" handler={logout} />
               </li>
             )}
           </ul>
