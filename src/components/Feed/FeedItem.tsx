@@ -22,8 +22,8 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
       className="border-1 my-7 rounded-xl overflow-hidden cursor-pointer"
       onClick={() => navigate(`${data.id}/view`)}
     >
-      <div className="bg-black">
-        <img className="w-fit h-full m-auto" src={data.thumbnail_url} />
+      <div className="bg-black h-90">
+        <img className="w-fit max-h-full m-auto" src={data.thumbnail_url} />
       </div>
       <div className="p-4 border-t-1">
         <div className="text-lg font-bold truncate">{data.title}</div>
