@@ -33,7 +33,9 @@ export const Layout = () => {
             <Spinner />
           </div>
         )}
-        <Outlet />
+        <div className="mx-8 my-4">
+          <Outlet />
+        </div>
       </div>
     </>
   );

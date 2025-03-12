@@ -1,4 +1,3 @@
-import { User } from "@supabase/supabase-js";
 import { db } from "../supabase";
 import { TItineraryFeed, TItineraryFeedDTO, TItineraryDetail, TItineraryView } from "../types";
 import { getUserSvc } from "./auth";

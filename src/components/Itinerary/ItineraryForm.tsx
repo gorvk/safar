@@ -63,91 +63,89 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
   };
 
   return (
-    <div className="m-4">
-      <Form method="post" encType="multipart/form-data">
-        <div className="flex flex-col gap-4 mb-4">
-          <input
-            defaultValue={data?.title}
-            placeholder="Title"
-            name="title"
+    <Form method="post" encType="multipart/form-data">
+      <div className="flex flex-col gap-4 mb-4">
+        <input
+          defaultValue={data?.title}
+          placeholder="Title"
+          name="title"
+          required={true}
+          className="text-5xl outline-0"
+        />
+        <input
+          defaultValue={data?.source}
+          placeholder="Source"
+          name="source"
+          required={true}
+          className="text-xl outline-0"
+        />
+        <input
+          defaultValue={data?.destination}
+          placeholder="Destination"
+          name="destination"
+          required={true}
+          className="text-xl outline-0"
+        />
+        <div className="max-w-60">
+          <Datepicker
+            labelBackground="bg-white"
             required={true}
-            className="text-5xl outline-0"
+            defaultValue={data?.uploaded_duration}
+            placeholder="Journey date"
+            name="uploaded_duration"
+            fontSize="text-xl"
           />
-          <input
-            defaultValue={data?.source}
-            placeholder="Source"
-            name="source"
-            required={true}
-            className="text-xl outline-0"
+        </div>
+        <input
+          readOnly
+          className="hidden"
+          value={JSON.stringify(photos.map((r) => r.value))}
+          name="exisiting_photos"
+        />
+      </div>
+      <div className="flex items-baseline w-full overflow-x-auto gap-4 p-2">
+        {photos.map((photo) => (
+          <ImageItem
+            key={photo.id}
+            src={photo.value}
+            deletePhoto={() => deletePhoto(photo.id)}
           />
-          <input
-            defaultValue={data?.destination}
-            placeholder="Destination"
-            name="destination"
-            required={true}
-            className="text-xl outline-0"
-          />
-          <div className="max-w-60">
-            <Datepicker
-              labelBackground="bg-white"
-              required={true}
-              defaultValue={data?.uploaded_duration}
-              placeholder="Journey date"
-              name="uploaded_duration"
-              fontSize="text-xl"
+        ))}
+      </div>
+      <hr />
+      <div className="flex flex-col gap-6 my-4">
+        <div className="flex gap-6 items-center">
+          <label className="cursor-pointer">
+            <input
+              ref={imageUploadInputRef}
+              className="hidden"
+              placeholder="none"
+              type="file"
+              accept="image"
+              name="photos"
+              onChange={(event) => getSelectedFileUrls(event.target.files)}
+              multiple={true}
             />
+            <Image />
+          </label>
+          <div className="cursor-pointer" onClick={() => addCheckpoint()}>
+            <ListUI color="fill-app-color" />
           </div>
-          <input
-            readOnly
-            className="hidden"
-            value={JSON.stringify(photos.map((r) => r.value))}
-            name="exisiting_photos"
+          <button
+            type="submit"
+            className="bg-app-color py-1 min-w-14 rounded-lg font-bold text-white cursor-pointer"
+          >
+            POST
+          </button>
+        </div>
+        {checkpoints.map((data, index) => (
+          <CheckpointForm
+            key={data.id}
+            data={data}
+            deleteCheckpoint={() => deleteCheckpoint(index)}
           />
-        </div>
-        <div className="flex items-baseline w-full overflow-x-auto gap-4 p-2">
-          {photos.map((photo) => (
-            <ImageItem
-              key={photo.id}
-              src={photo.value}
-              deletePhoto={() => deletePhoto(photo.id)}
-            />
-          ))}
-        </div>
-        <hr />
-        <div className="flex flex-col gap-6 my-4">
-          <div className="flex gap-6 items-center">
-            <label className="cursor-pointer">
-              <input
-                ref={imageUploadInputRef}
-                className="hidden"
-                placeholder="none"
-                type="file"
-                accept="image"
-                name="photos"
-                onChange={(event) => getSelectedFileUrls(event.target.files)}
-                multiple={true}
-              />
-              <Image />
-            </label>
-            <div className="cursor-pointer" onClick={() => addCheckpoint()}>
-              <ListUI color="fill-app-color" />
-            </div>
-            <button
-              type="submit"
-              className="bg-app-color py-1 min-w-14 rounded-lg font-bold text-white cursor-pointer"
-            >
-              POST
-            </button>
-          </div>
-          {checkpoints.map((data, index) => (
-            <CheckpointForm
-              key={data.id}
-              data={data}
-              deleteCheckpoint={() => deleteCheckpoint(index)}
-            />
-          ))}
-        </div>
-      </Form>
-    </div>
+        ))}
+      </div>
+    </Form>
   );
 };

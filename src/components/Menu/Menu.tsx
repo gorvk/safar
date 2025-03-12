@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { TAppState } from "../../types";
 import loader from "../../redux/slices/loader";
 import auth from "../../redux/slices/auth";
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const authState = useSelector((state: TAppState) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -63,9 +65,14 @@ const Menu = () => {
                 <Option label="Login" handler={login} />
               </li>
             ) : (
-              <li>
-                <Option label="Logout" handler={logout} />
-              </li>
+              <>
+                <li>
+                  <Option label="Profile" handler={() => navigate('profile')} />
+                </li>
+                <li>
+                  <Option label="Logout" handler={logout} />
+                </li>
+              </>
             )}
           </ul>
         </div>

@@ -16,6 +16,20 @@ export const getItineraryFeedDataSF = async (pageNumber?: number): Promise<{ dat
     return { data, count };
 };
 
+export const getPrfoileItineraryFeedDataSF = async (uid: string, pageNumber?: number): Promise<{ data: TItineraryFeedDTO[], count: number }> => {
+    const { start, end } = getPaginatationIndex(pageNumber);
+    const { data, count, error } = await db.from('itinerary_feed')
+        .select<"*", TItineraryFeedDTO>("*", { count: 'exact' }).eq("user_id", uid)
+        .range(start, end - 1);
+
+    if (error || !count) {
+        console.error(error);
+        return { data: [], count: 0 };
+    }
+
+    return { data, count };
+};
+
 export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryView> => {
     const { data, error } = await db.from("itinerary_feed").select("*, ...itinerary_detail(*)").eq("id", id);
 
