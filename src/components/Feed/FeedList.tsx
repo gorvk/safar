@@ -39,11 +39,14 @@ export const FeedList = (props: {
   }, []);
 
   return (
-    <>
-      {feedState.data?.map((item) => (
-        <FeedItem data={item} key={item.id} />
+    <div className="mb-10">
+      {feedState.data?.map((item, index) => (
+        <>
+          {index > 0 && <hr className="text-app-sperator" />}
+          <FeedItem data={item} key={item.id} />
+        </>
       ))}
       <Paginator />
-    </>
+    </div>
   );
 };

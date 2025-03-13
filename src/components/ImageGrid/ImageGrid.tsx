@@ -10,7 +10,7 @@ export const ImageGrid = (props: { photoUrls: string[] }) => {
   const prevImage = () => 0 === count ? setCount(photoUrls.length - 1) : setCount(count - 1);
 
   return (
-    <div className={"w-full relative m-auto border-2 h-90 bg-black flex items-center " + count}>
+    <div className={"w-full relative m-auto rounded-xl h-90 bg-black flex items-center " + count}>
       {photoUrls.map((url, index) =>{
         const display = index === count ? "block" : "hidden"; 
         return <img key={index} src={url} className={"w-fit max-h-full m-auto " + display} />;

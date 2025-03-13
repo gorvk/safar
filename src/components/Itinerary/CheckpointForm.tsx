@@ -23,7 +23,7 @@ export const CheckpointForm = (props: {
   };
 
   return (
-    <div className="flex flex-col gap-4 bg-app-color text-white p-5 rounded-lg sm:w-1/2">
+    <div className="flex flex-col gap-4 bg-app-color text-white p-5 rounded-lg lg:w-2/3">
       <div className="flex w-full justify-between gap-6">
         <input
           defaultValue={checkpoint.title}

@@ -27,13 +27,13 @@ export const Layout = () => {
   }, []);
   return (
     <>
-      <div className="absolute left-0 right-0 w-full min-h-full shadow-2xl bg-white mx-auto sm:max-w-3/5">
+      <div className="absolute left-0 right-0 w-full min-h-full border-1 border-app border-app-sperator mx-auto lg:max-w-3/5">
         {loaderState && (
           <div className="z-50 absolute w-full h-full bg-white">
             <Spinner />
           </div>
         )}
-        <div className="mx-8 my-4">
+        <div className="m-4 lg:m-12">
           <Outlet />
         </div>
       </div>

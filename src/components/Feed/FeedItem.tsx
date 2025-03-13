@@ -8,14 +8,18 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="border-1 my-7 rounded-xl overflow-hidden cursor-pointer"
-      onClick={() => navigate(`/${data.id}/view`)}
-    >
-      <div className="bg-black h-90">
-        <img className="w-fit max-h-full m-auto" src={data.thumbnail_url} />
-      </div>
-      <div className="p-4 border-t-1">
+    <>
+      <div
+        className="my-2 rounded-xl py-4 mx-auto overflow-hidden cursor-pointer"
+        onClick={() => navigate(`/${data.id}/view`)}
+      >
+        <MetadataBar
+          userId={data.user_id}
+          uploadedDuration={data.uploaded_duration}
+        />
+        <div className="w-full relative m-auto rounded-xl h-90 bg-black flex items-center my-4">
+          <img className="w-fit max-h-full m-auto" src={data.thumbnail_url} />
+        </div>
         <div className="text-lg font-bold truncate">{data.title}</div>
         <div className="text-md">
           <SourceDestinationBar
@@ -23,11 +27,7 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
             destination={data.destination}
           />
         </div>
-        <MetadataBar
-          userId={data.user_id}
-          uploadedDuration={data.uploaded_duration}
-        />
       </div>
-    </div>
+    </>
   );
 };

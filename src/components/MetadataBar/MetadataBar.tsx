@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUserMetadata } from "../../svc/auth";
 import { getDate } from "../../utils";
+import { Profile } from "../../Icons/Profile";
 
 export const MetadataBar = (props: {
   userId?: string;
@@ -20,9 +21,13 @@ export const MetadataBar = (props: {
   }, []);
 
   return (
-    <div className="justify-start gap-6 text-gray-500 font-medium">
-      {userId && <div className="truncate">{userName}</div>}
-      <div>{formatedDate}</div>
+    <div className="flex items-center justify-between font-bold">
+      {userId && (
+        <div className="flex items-center gap-2">
+          <Profile /> {userName}
+        </div>
+      )}
+      <div className="text-gray-500">{formatedDate}</div>
     </div>
   );
 };

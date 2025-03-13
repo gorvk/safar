@@ -112,7 +112,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
           />
         ))}
       </div>
-      <hr />
+      <hr className="text-app-sperator" />
       <div className="flex flex-col gap-6 my-4">
         <div className="flex gap-6 items-center">
           <label className="cursor-pointer">

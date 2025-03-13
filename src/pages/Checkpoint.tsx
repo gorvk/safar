@@ -34,18 +34,18 @@ export const Checkpoint = () => {
 
   return (
     <>
-      <div className="m-6 flex flex-col gap-2">
-        <div className="text-xl font-bold flex justify-between">
+      <div className="flex flex-col gap-2">
+        <div className="text-xl font-bold flex w-full gap-2 justify-between">
           <div
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center w-2/3 gap-2 cursor-pointer"
             onClick={() => window.open(checkpointData.location_url, "_blank")}
           >
             <Location type="fill-black" />
-            {checkpointData.title.toUpperCase()}
+            {checkpointData.title.toUpperCase() + ","}
           </div>
           <MetadataBar uploadedDuration={checkpointData.visited_at} />
         </div>
-        <hr />
+        <hr className="text-app-sperator" />
         <div className="text-lg">
           <SourceDestinationBar
             source="Things to Try"

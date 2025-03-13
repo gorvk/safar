@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { TCheckpoint } from "../../types";
-import { getTime } from "../../utils";
+import { getDate } from "../../utils";
 import { Location } from "../../Icons/Location"
 export const CheckpointItem = (props: { data: TCheckpoint, itineraryId: string, checkpointId: number }) => {
   const { data, itineraryId, checkpointId } = props;
-  const time = getTime(data.visited_at);
+  const time = getDate(data.visited_at);
   const navigate = useNavigate()
 
   return (
