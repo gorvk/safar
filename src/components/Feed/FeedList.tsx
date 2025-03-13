@@ -6,6 +6,7 @@ import { TAppState, TItineraryFeedDTO } from "../../types";
 import loader from "../../redux/slices/loader";
 import feed from "../../redux/slices/feed";
 import { Paginator } from "./Paginator";
+import React from "react";
 
 export const FeedList = (props: {
   defaultData?: { data: TItineraryFeedDTO[]; count: number };
@@ -41,10 +42,10 @@ export const FeedList = (props: {
   return (
     <div className="mb-10">
       {feedState.data?.map((item, index) => (
-        <>
+        <React.Fragment key={item.id}>
           {index > 0 && <hr className="text-app-sperator" />}
-          <FeedItem data={item} key={item.id} />
-        </>
+          <FeedItem data={item} />
+        </React.Fragment>
       ))}
       <Paginator />
     </div>

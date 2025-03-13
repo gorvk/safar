@@ -1,11 +1,16 @@
-import { ActionFunctionArgs } from "react-router-dom";
+import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { db } from "../../supabase";
 import { TItineraryDetail, TCheckpoint, TItineraryView } from "../../types";
 import { addItinerary, editItinerary } from "../../svc/itineraryForm";
+import { store } from "../../redux/store";
+import loader from "../../redux/slices/loader";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
+  store.dispatch(loader.actions.setloader(true));
   const formData = await request.formData();
-  const photos = JSON.parse(String(formData.get("exisiting_photos"))) as string[];
+  const photos = JSON.parse(
+    String(formData.get("exisiting_photos"))
+  ) as string[];
   const payload: TItineraryView = {
     ...getFormDataPayload(formData),
     photos: await getPhotoUrls(photos),
@@ -15,9 +20,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formType = urlParts[urlParts.length - 1];
 
   if (formType === "add") {
-    await addItinerary(payload);
+    const id = await addItinerary(payload);
+    store.dispatch(loader.actions.setloader(false));
+    if (id) {
+      return redirect(`/${id}/view`);
+    }
   } else if (formType === "edit" && params["id"]) {
     await editItinerary(payload, params["id"]);
+    store.dispatch(loader.actions.setloader(false));
+    return redirect(`/${params["id"]}/view`);
   }
 
   return null;
