@@ -1,9 +1,26 @@
 # SAFAR - A Sharable itinerary
-## Planned features
-- Share itinerary using dynamic links.
-- Add location to location paths.
-- Add photos to location and paths.
-- Add notes, lists, and disclamers about the locations visited.
+## MVP features
+[X] Share itinerary using dynamic links.
+[X] Add location to location paths.
+[X] Add photos to location, and checkpoints
+[X] Authentication
+[X] Edit Page
+[X] View Page
+[X] Search
+[X] Profile page
+[] Delete Itinerary
+[] Home Button
+[] Share button
+[] Fail page
+[] Profile icon
+[] Custom username
+[] Landing Page
+
+## Planned Non MVP feature
+[] Time picker
+[] SSR
+[] React router v7 framework mode upgrade
+
 ## Tech stack
 - React
 - Tailwind
