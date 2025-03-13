@@ -2,7 +2,6 @@ import { useState } from "react";
 
 export const Datepicker = (props: {
   defaultValue: string | undefined;
-  placeholder: string;
   name: string;
   fontSize: "text-xl" | "text-sm";
   labelColor: "text-gray-500" | "text-white";
@@ -11,7 +10,6 @@ export const Datepicker = (props: {
 }) => {
   const {
     defaultValue,
-    placeholder,
     name,
     fontSize,
     required,

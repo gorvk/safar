@@ -50,7 +50,6 @@ export const CheckpointForm = (props: {
         labelColor="text-white"
         required={true}
         defaultValue={checkpoint.visited_at}
-        placeholder="Time picker"
         name={id + "/visited_at"}
         fontSize="text-sm"
       />

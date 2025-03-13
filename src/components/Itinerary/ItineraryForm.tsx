@@ -91,7 +91,6 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
           scheme="scheme-light"
           required={true}
           defaultValue={data?.uploaded_duration}
-          placeholder="Journey date"
           name="uploaded_duration"
           fontSize="text-xl"
         />
