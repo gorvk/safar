@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getDate } from "../../utils";
 
 export const Datepicker = (props: {
   defaultValue: string | undefined;
@@ -26,10 +27,10 @@ export const Datepicker = (props: {
       <input
         type="date"
         name={name}
+        defaultValue={getDate((new Date()).toISOString())}
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}
-        placeholder="dd-mm-yyyy"
         className={`text-xl outline-0 ${fontSize} ${scheme}`}
       />
     </div>
