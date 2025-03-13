@@ -17,7 +17,8 @@ export const Datepicker = (props: {
     labelColor,
     scheme,
   } = props;
-  const [value, setValue] = useState<string | undefined>(defaultValue);
+  const currentDate = getDate((new Date()).toISOString());
+  const [value, setValue] = useState<string>(defaultValue || currentDate);
 
   return (
     <div className="flex relative max-w-80">
@@ -27,7 +28,7 @@ export const Datepicker = (props: {
       <input
         type="date"
         name={name}
-        defaultValue={getDate((new Date()).toISOString())}
+        defaultValue={currentDate}
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}
