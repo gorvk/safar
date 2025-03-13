@@ -18,7 +18,7 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
           uploadedDuration={data.uploaded_duration}
         />
         <div className="w-full relative m-auto rounded-xl h-90 bg-black flex items-center my-4">
-          <img className="w-fit max-h-full m-auto" src={data.thumbnail_url} />
+          <img className="max-h-full m-auto" src={data.thumbnail_url} />
         </div>
         <div className="text-lg font-bold truncate">{data.title}</div>
         <div className="text-md">

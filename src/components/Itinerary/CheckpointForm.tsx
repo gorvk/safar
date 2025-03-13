@@ -46,7 +46,8 @@ export const CheckpointForm = (props: {
         className="text-lg outline-0 w-full placeholder-white"
       />
       <Datepicker
-        labelBackground="bg-app-color"
+        scheme="scheme-dark"
+        labelColor="text-white"
         required={true}
         defaultValue={checkpoint.visited_at}
         placeholder="Time picker"

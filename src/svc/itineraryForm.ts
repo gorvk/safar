@@ -23,7 +23,7 @@ export const editItinerary = async (payload: TItineraryView, id: string): Promis
     .eq('id', id)
     .select<"*", TItineraryFeedDTO>();
 
-  if (!error) {
+  if (!error && data) {
     const detailData: TItineraryDetail = getDetailDataPayload(payload, data[0]);
     await db.from("itinerary_detail").update(detailData).eq('feed_id', id);
   }

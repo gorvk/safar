@@ -6,6 +6,7 @@ import { TAppState } from "../../types";
 import loader from "../../redux/slices/loader";
 import auth from "../../redux/slices/auth";
 import { useNavigate } from "react-router-dom";
+import { HamMenu } from "../../Icons/HamMenu";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,45 +36,29 @@ const Menu = () => {
       });
   };
 
+  const anonOptions = [{ label: "Login", handler: login }];
+  const userOptions = [
+    { label: "Profile", handler: () => navigate("profile") },
+    { label: "Logout", handler: logout },
+  ];
+
   return (
     <div className="relative">
       <button
         onClick={toggleMenu}
         className="flex items-center justify-center w-11 h-11 bg-app-color text-white rounded-md"
       >
-        <svg
-          className="w-fit h-fit"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+        <HamMenu />
       </button>
 
       {isOpen && (
         <div className="absolute right-0 w-40 shadow-md rounded-md mt-4">
-          <ul className="flex flex-col gap-0.5">
-            {!authState.user ? (
-              <li>
-                <Option label="Login" handler={login} />
+          <ul className="flex flex-col gap-0.5 z-10">
+            {(!authState.user ? anonOptions : userOptions).map((option) => (
+              <li className="z-10">
+                <Option label={option.label} handler={option.handler} />
               </li>
-            ) : (
-              <>
-                <li>
-                  <Option label="Profile" handler={() => navigate('profile')} />
-                </li>
-                <li>
-                  <Option label="Logout" handler={logout} />
-                </li>
-              </>
-            )}
+            ))}
           </ul>
         </div>
       )}

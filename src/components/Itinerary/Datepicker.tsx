@@ -5,8 +5,9 @@ export const Datepicker = (props: {
   placeholder: string;
   name: string;
   fontSize: "text-xl" | "text-sm";
-  labelBackground: "bg-app-color" | "bg-white";
+  labelColor: "text-gray-500" | "text-white";
   required: boolean;
+  scheme: "scheme-light" | "scheme-dark";
 }) => {
   const {
     defaultValue,
@@ -14,18 +15,16 @@ export const Datepicker = (props: {
     name,
     fontSize,
     required,
-    labelBackground,
+    labelColor,
+    scheme,
   } = props;
   const [value, setValue] = useState<string | undefined>(defaultValue);
-  const inputTextTransparent = !value && "text-transparent";
 
   return (
-    <div className={`flex relative w-full`}>
-      {!value && (
-        <div className={`absolute z-20 text-xl w-2/3 truncate ${labelBackground}`}>
-          {"Journey date"}
-        </div>
-      )}
+    <div className="flex relative max-w-80">
+      <label className={`text-xl w-2/3 truncate ${labelColor}`}>
+        {"Journey date: "}
+      </label>
       <input
         type="date"
         name={name}
@@ -33,7 +32,7 @@ export const Datepicker = (props: {
         required={required}
         onChange={(event) => setValue(event.target.value)}
         placeholder={placeholder}
-        className={`z-10 select-none text-xl w-full outline-0 ${fontSize} ${inputTextTransparent}`}
+        className={`text-xl outline-0 ${fontSize} ${scheme}`}
       />
     </div>
   );
