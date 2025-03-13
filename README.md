@@ -8,18 +8,18 @@
 * [X] View Page
 * [X] Search
 * [X] Profile page
-* [] Delete Itinerary
-* [] Home Button
-* [] Share button
-* [] Fail page
-* [] Profile icon
-* [] Custom username
-* [] Landing Page
+* [ ] Delete Itinerary
+* [ ] Home Button
+* [ ] Share button
+* [ ] Fail page
+* [ ] Profile icon
+* [ ] Custom username
+* [ ] Landing Page
 
 ## Planned Non MVP feature
-* [] Time picker
-* [] SSR
-* [] React router v7 framework mode upgrade
+* [ ] Time picker
+* [ ] SSR
+* [ ] React router v7 framework mode upgrade
 
 ## Tech stack
 - React
