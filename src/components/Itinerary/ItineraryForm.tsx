@@ -85,8 +85,8 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
   };
   if (!user) {
     return (
-      <div className="absolute border-2 m-auto top-0 bottom-0 left-0 right-0 font-bold content-center">
-        <div className="flex border-2 p-2 justify-center items-end">
+      <div className="absolute m-auto top-0 bottom-0 left-0 right-0 font-bold content-center">
+        <div className="flex p-2 justify-center items-end">
           Please login or signup before continuing..
           <button
             className="text-white mx-2 font-bold bg-app-color rounded-md py-2 px-4 cursor-pointer"
