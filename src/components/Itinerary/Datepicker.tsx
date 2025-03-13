@@ -29,6 +29,7 @@ export const Datepicker = (props: {
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}
+        placeholder="dd-mm-yyyy"
         className={`text-xl outline-0 ${fontSize} ${scheme}`}
       />
     </div>
