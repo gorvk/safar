@@ -29,7 +29,7 @@ export const Layout = () => {
     <>
       <div className="absolute left-0 right-0 w-full min-h-full shadow-2xl bg-white mx-auto sm:max-w-3/5">
         {loaderState && (
-          <div className="z-50 absolute w-full h-full bg-app-color">
+          <div className="z-50 absolute w-full h-full bg-white">
             <Spinner />
           </div>
         )}

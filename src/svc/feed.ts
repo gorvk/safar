@@ -8,8 +8,8 @@ export const getItineraryFeedDataSF = async (pageNumber?: number): Promise<{ dat
         .select<"*", TItineraryFeedDTO>("*", { count: 'exact' })
         .range(start, end - 1);
 
-    if (error || !count) {
-        console.error(error);
+    if (!count) {
+        if (error) console.error(error);
         return { data: [], count: 0 };
     }
 
@@ -22,8 +22,8 @@ export const getPrfoileItineraryFeedDataSF = async (uid: string, pageNumber?: nu
         .select<"*", TItineraryFeedDTO>("*", { count: 'exact' }).eq("user_id", uid)
         .range(start, end - 1);
 
-    if (error || !count) {
-        console.error(error);
+    if (!count) {
+        if (error) console.error(error);
         return { data: [], count: 0 };
     }
 
@@ -47,8 +47,8 @@ export const searchFeedSF = async (query: string, pageNumber?: number): Promise<
         .select<"*", TItineraryFeedDTO>("*", { count: 'exact' })
         .textSearch("itinerary_feed_search", query).range(start, end - 1);
 
-    if (error || !count) {
-        console.error(error);
+    if (!count) {
+        if (error) console.error(error);
         return { data: [], count: 0 };
     }
 
