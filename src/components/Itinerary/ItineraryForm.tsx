@@ -2,13 +2,35 @@ import { useRef, useState } from "react";
 import { Image } from "../../Icons/Image";
 import { ListUI } from "../../Icons/ListUl";
 import { CheckpointForm } from "./CheckpointForm";
-import { TCheckpoint, TItineraryView, TListItem, TUUID } from "../../types";
+import {
+  TAppState,
+  TCheckpoint,
+  TItineraryView,
+  TListItem,
+  TUUID,
+} from "../../types";
 import { ImageItem } from "./ImageItem";
 import { Form } from "react-router-dom";
 import { Datepicker } from "./Datepicker";
+import { useDispatch, useSelector } from "react-redux";
+import loader from "../../redux/slices/loader";
+import { googleAuthSvc } from "../../svc/auth";
+import auth from "../../redux/slices/auth";
 
 export const ItineraryForm = (props: { data?: TItineraryView }) => {
   const { data } = props;
+  const user = useSelector((state: TAppState) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const login = () => {
+    dispatch(loader.actions.setloader(true));
+    googleAuthSvc()
+      .then((_user) => dispatch(auth.actions.setAuth({ user: _user })))
+      .finally(() => {
+        dispatch(loader.actions.setloader(false));
+      });
+  };
+
   const [checkpoints, setCheckpoints] = useState<TListItem<TCheckpoint>[]>(
     data?.checkpoints?.map((value) => ({
       value,
@@ -61,7 +83,30 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
       setPhotos([...photos, ...newPhotos]);
     }
   };
-
+  if (!user) {
+    return (
+      <div className="absolute m-auto top-0 bottom-0 left-0 right-0 font-bold content-center">
+        <div className="flex justify-center items-end">
+          Please
+          <button
+            className="text-white mx-2 font-bold bg-app-color rounded-md py-2 px-4 cursor-pointer"
+            onClick={login}
+          >
+            login
+          </button>
+          or
+          <button
+            className="text-white mx-2 font-bold bg-app-color rounded-md py-2 px-4 cursor-pointer"
+            onClick={login}
+          >
+            signup
+          </button>
+          before continuing...
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <Form method="post" encType="multipart/form-data">
       <div className="flex flex-col gap-4 mb-4">
