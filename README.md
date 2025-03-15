@@ -8,6 +8,7 @@
 * [X] View Page
 * [X] Search
 * [X] Profile page
+* [ ] other user's Profile
 * [ ] Delete Itinerary
 * [ ] Home Button
 * [ ] Share button
