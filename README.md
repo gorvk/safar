@@ -8,7 +8,7 @@
 * [X] View Page
 * [X] Search
 * [X] Profile page
-* [ ] other user's Profile
+* [ ] Other user's profile view
 * [ ] Delete Itinerary
 * [ ] Home Button
 * [ ] Share button
@@ -21,6 +21,7 @@
 * [ ] Time picker
 * [ ] SSR
 * [ ] React router v7 framework mode upgrade
+* [ ] AI for short videos
 
 ## Tech stack
 - React
