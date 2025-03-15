@@ -1,27 +1,4 @@
-# SAFAR - A Sharable itinerary
-## MVP features
-* [X] Share itinerary using dynamic links.
-* [X] Add location to location paths.
-* [X] Add photos to location, and checkpoints
-* [X] Authentication
-* [X] Edit Page
-* [X] View Page
-* [X] Search
-* [X] Profile page
-* [ ] Other user's profile view
-* [ ] Delete Itinerary
-* [ ] Home Button
-* [ ] Share button
-* [ ] Fail page
-* [ ] Profile icon
-* [ ] Custom username
-* [ ] Landing Page
-
-## Planned Non MVP feature
-* [ ] Time picker
-* [ ] SSR
-* [ ] React router v7 framework mode upgrade
-* [ ] AI for short videos
+# SAFAR - A Sharable Itinerary
 
 ## Tech stack
 - React
