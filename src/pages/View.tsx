@@ -44,11 +44,11 @@ export const View = () => {
         />
         <hr className="text-app-sperator" />
         <div className="flex justify-between">
-          <div className="text-lg font-bold">{data.title}</div>
+          <div className="text-md font-bold">{data.title}</div>
           {data.user_id === auth.user?.id && (
             <button
               onClick={() => navigate(`/${id}/edit`)}
-              className="bg-app-color uppercase py-1 min-w-14 h-fit rounded-lg font-bold text-white cursor-pointer"
+              className="bg-app-color text-sm uppercase py-1 min-w-14 h-fit rounded-lg font-bold text-white cursor-pointer"
             >
               Edit
             </button>

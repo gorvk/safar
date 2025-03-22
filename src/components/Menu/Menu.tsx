@@ -46,7 +46,7 @@ const Menu = () => {
     <div className="relative">
       <button
         onClick={toggleMenu}
-        className="flex items-center justify-center w-11 h-11 bg-app-color text-white rounded-md"
+        className="flex items-center justify-center w-10 h-10 bg-app-color text-white rounded-md"
       >
         <HamMenu />
       </button>

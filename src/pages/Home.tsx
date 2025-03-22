@@ -6,7 +6,7 @@ import Menu from "../components/Menu/Menu";
 export const Home = () => {
   return (
     <>
-      <div className="flex items-center justify-between gap-5">
+      <div className="flex items-center justify-between gap-3">
         <SearchBar />
         <AddItineraryButton />
         <Menu />
