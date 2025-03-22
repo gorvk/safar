@@ -1,4 +1,3 @@
-import { SourceDestinationBar } from "../components/SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
 import { TCheckpoint } from "../types";
 import { useLocation, useParams } from "react-router-dom";
