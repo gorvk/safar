@@ -26,9 +26,9 @@ export const Checkpoint = () => {
 
   const openUrl = (url: string | undefined) => {
     if (url) {
-      window.open(url, "_blank")
+      window.open(url, "_blank");
     }
-  }
+  };
 
   useEffect(() => {
     getCheckpointData();
@@ -41,20 +41,21 @@ export const Checkpoint = () => {
   return (
     <>
       <div className="flex flex-col gap-2">
-        <div className="text-md font-bold flex w-full gap-2 justify-between">
+        <div className="font-bold items-center w-full">
+          {checkpointData.title.toUpperCase()}
+        </div>
+        {/* <hr className="text-app-sperator" /> */}
+        <div className="flex w-full gap-2 justify-between">
           <div
-            className="flex items-center w-2/3 gap-2 cursor-pointer"
             onClick={() => openUrl(checkpointData.location_url)}
+            className="flex text-sm gap-1 rounded-md justify-evenly items-center cursor-pointer"
           >
-            <Location type="fill-black" />
-            {checkpointData.title.toUpperCase()}
+            <div className="text-app-color font-medium underline">view on maps</div>
+            <Location type="fill-app-color" />
           </div>
           <MetadataBar uploadedDuration={checkpointData.visited_at} />
         </div>
         <hr className="text-app-sperator" />
-        <div className="text-sm">
-          <SourceDestinationBar source="Things to Try" destination="" />
-        </div>
         <div>
           <ul className="flex flex-col">
             {checkpointData.things_to_try?.map((thing, index) => (
