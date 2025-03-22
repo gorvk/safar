@@ -1,2 +1,2 @@
-export const pageSize = 100;
+export const pageSize = 10;
 export const debounceTimeInMS = 1000;

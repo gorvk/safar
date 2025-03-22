@@ -22,7 +22,7 @@ export const Paginator = () => {
   };
 
   return (
-    <div className="flex text-white w-fit gap-2 fixed bottom-2 left-0 right-0 m-auto">
+    <div className="flex text-sm text-white w-fit gap-2 bottom-2 left-0 right-0 m-auto">
       <PaginatorButton
         clickHandler={() => getData(feedState.pageNumber - 1)}
         isDisabled={getPaginatationIndex(feedState.pageNumber).start < pageSize}
