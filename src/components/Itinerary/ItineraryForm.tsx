@@ -148,7 +148,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
       </div>
       <hr className="text-app-sperator" />
       <div className="flex flex-col gap-6 my-4">
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-4 items-center">
           <label className="cursor-pointer">
             <input
               ref={imageUploadInputRef}
@@ -167,7 +167,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
           </div>
           <button
             type="submit"
-            className="bg-app-color py-1 min-w-14 rounded-lg font-bold text-white cursor-pointer"
+            className="bg-app-color py-1 text-sm min-w-14 rounded-lg font-bold text-white cursor-pointer"
           >
             POST
           </button>
