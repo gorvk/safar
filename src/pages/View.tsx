@@ -61,7 +61,7 @@ export const View = () => {
           />
           <CheckpointList
             checkpoints={data.checkpoints}
-            itineraryId={data.id}
+            itineraryId={data.feed_id}
           />
         </div>
       </div>

@@ -11,7 +11,7 @@ export const EditItinerary = () => {
 
   const getItineraryDetailData = async () => {
     if (id) {
-      let detailData = await getItineraryDetailDataSF(id);
+      const detailData = await getItineraryDetailDataSF(id);
       detailData.uploaded_duration = getDate(detailData.uploaded_duration);
       detailData.checkpoints = detailData.checkpoints.map((checkpoint) => ({
         ...checkpoint,
