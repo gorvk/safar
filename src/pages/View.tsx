@@ -44,7 +44,7 @@ export const View = () => {
         />
         <hr className="text-app-sperator" />
         <div className="flex justify-between">
-          <div className="text-xl font-bold">{data.title}</div>
+          <div className="text-lg font-bold">{data.title}</div>
           {data.user_id === auth.user?.id && (
             <button
               onClick={() => navigate(`/${id}/edit`)}
@@ -54,19 +54,15 @@ export const View = () => {
             </button>
           )}
         </div>
-        <div>
-          <div className="text-lg">
-            <SourceDestinationBar
-              source={data.source}
-              destination={data.destination}
-            />
-          </div>
-          <div>
-            <CheckpointList
-              checkpoints={data.checkpoints}
-              itineraryId={data.id}
-            />
-          </div>
+        <div className="text-md">
+          <SourceDestinationBar
+            source={data.source}
+            destination={data.destination}
+          />
+          <CheckpointList
+            checkpoints={data.checkpoints}
+            itineraryId={data.id}
+          />
         </div>
       </div>
     </>

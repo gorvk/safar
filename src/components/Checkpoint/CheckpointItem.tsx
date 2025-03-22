@@ -13,9 +13,9 @@ export const CheckpointItem = (props: { data: TCheckpoint, itineraryId: string, 
       <div onClick={() => navigate(`../${itineraryId}/${checkpointId}/view`, { state: { data } })} className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium flex justify-between cursor-pointer">
         <div className="flex gap-4 items-center">
           <Location type="fill-white"/>
-          <div className="text-lg">{data.title}</div>
+          <div>{data.title}</div>
         </div>
-        <div className="text-lg">{time}</div>
+        <div>{time}</div>
       </div>
     </li>
   );

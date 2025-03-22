@@ -30,7 +30,7 @@ export const CheckpointForm = (props: {
           placeholder="Checkpoint title"
           required={true}
           name={id + "/title"}
-          className="text-2xl outline-0 w-full placeholder-white"
+          className="text-xl outline-0 w-full placeholder-white"
         />
         <div className="cursor-pointer" onClick={addThingsToTry}>
           <ListUI color="fill-white" />
@@ -43,7 +43,7 @@ export const CheckpointForm = (props: {
         defaultValue={checkpoint.location_url}
         placeholder="Location URL"
         name={id + "/location_url"}
-        className="text-lg outline-0 w-full placeholder-white"
+        className="text-md outline-0 w-full placeholder-white"
       />
       <Datepicker
         scheme="scheme-dark"
@@ -51,7 +51,6 @@ export const CheckpointForm = (props: {
         required={true}
         defaultValue={checkpoint.visited_at}
         name={id + "/visited_at"}
-        fontSize="text-sm"
       />
       {thingsToTry.map((thing) => (
         <input
@@ -59,7 +58,7 @@ export const CheckpointForm = (props: {
           defaultValue={thing.value}
           placeholder="Things to try"
           name={id + "/things_to_try"}
-          className="text-lg outline-0 placeholder-white"
+          className="text-md outline-0 placeholder-white"
         />
       ))}
     </div>

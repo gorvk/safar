@@ -4,7 +4,6 @@ import { getDate } from "../../utils";
 export const Datepicker = (props: {
   defaultValue: string | undefined;
   name: string;
-  fontSize: "text-xl" | "text-sm";
   labelColor: "text-gray-500" | "text-white";
   required: boolean;
   scheme: "scheme-light" | "scheme-dark";
@@ -12,7 +11,6 @@ export const Datepicker = (props: {
   const {
     defaultValue,
     name,
-    fontSize,
     required,
     labelColor,
     scheme,
@@ -22,7 +20,7 @@ export const Datepicker = (props: {
 
   return (
     <div className="flex relative max-w-80">
-      <label className={`text-xl w-2/3 truncate ${labelColor}`}>
+      <label className={`text-md w-2/3 truncate ${labelColor}`}>
         {"Journey date: "}
       </label>
       <input
@@ -32,7 +30,7 @@ export const Datepicker = (props: {
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}
-        className={`text-xl outline-0 ${fontSize} ${scheme}`}
+        className={`outline-0 text-md ${scheme}`}
       />
     </div>
   );

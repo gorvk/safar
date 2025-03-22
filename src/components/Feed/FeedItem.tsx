@@ -13,15 +13,17 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
         className="my-2 rounded-xl py-4 mx-auto overflow-hidden cursor-pointer"
         onClick={() => navigate(`/${data.id}/view`)}
       >
-        <MetadataBar
-          userId={data.user_id}
-          uploadedDuration={data.uploaded_duration}
-        />
+        <div className="text-md">
+          <MetadataBar
+            userId={data.user_id}
+            uploadedDuration={data.uploaded_duration}
+          />
+        </div>
         <div className="w-full relative m-auto rounded-xl h-90 bg-black flex items-center my-4">
           <img className="max-h-full m-auto" src={data.thumbnail_url} />
         </div>
-        <div className="text-lg font-bold truncate">{data.title}</div>
-        <div className="text-md">
+        <div className="text-md font-bold truncate">{data.title}</div>
+        <div className="text-sm">
           <SourceDestinationBar
             source={data.source}
             destination={data.destination}
