@@ -104,21 +104,21 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
       <div className="flex flex-col gap-4 mb-4">
         <input
           defaultValue={data?.title}
-          placeholder="Title"
+          placeholder="Title*"
           name="title"
           required={true}
           className="text-3xl outline-0"
         />
         <input
           defaultValue={data?.source}
-          placeholder="Source"
+          placeholder="Source*"
           name="source"
           required={true}
           className="text-md outline-0"
         />
         <input
           defaultValue={data?.destination}
-          placeholder="Destination"
+          placeholder="Destination*"
           name="destination"
           required={true}
           className="text-md outline-0"

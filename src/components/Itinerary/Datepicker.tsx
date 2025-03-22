@@ -21,12 +21,11 @@ export const Datepicker = (props: {
   return (
     <div className="flex relative max-w-80">
       <label className={`text-md w-2/3 truncate ${labelColor}`}>
-        {"Journey date: "}
+        {`Journey date${required ? '*' : ''}: `}
       </label>
       <input
         type="date"
         name={name}
-        defaultValue={currentDate}
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}

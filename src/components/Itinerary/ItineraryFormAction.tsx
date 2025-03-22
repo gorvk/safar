@@ -60,31 +60,31 @@ const getFormDataPayload = (formData: FormData) => {
   > = {} as TItineraryDetail;
   for (const entry of formData.entries()) {
     const control = entry[0] as keyof TItineraryDetail;
-    const controlValue = entry[1];
+    const controlValue = String(entry[1]);
     const controlMetadata = control.split("/");
     const id = controlMetadata[0];
     const name = controlMetadata[1] as keyof TCheckpoint;
     let current = checkpointMap[id];
-    if (id && name) {
+    if (id && name && controlValue) {
       if (current) {
         if (name === "things_to_try") {
           current[name] = current[name]
-            ? [...current[name], String(controlValue)]
-            : [String(controlValue)];
+            ? [...current[name], controlValue]
+            : [controlValue];
         } else {
-          current[name] = String(controlValue);
+          current[name] = controlValue;
         }
       } else {
         if (name === "things_to_try") {
-          current = { [name]: [String(controlValue)] } as TCheckpoint;
+          current = { [name]: [controlValue] } as TCheckpoint;
         } else {
           current = {} as TCheckpoint;
-          current[name] = String(controlValue);
+          current[name] = controlValue;
         }
       }
       checkpointMap[id] = current;
-    } else {
-      payload[control] = String(controlValue);
+    } else if(controlValue) {
+      payload[control] = controlValue;
     }
   }
   payload["checkpoints"] = Object.values(checkpointMap);

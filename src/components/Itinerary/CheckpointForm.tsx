@@ -27,7 +27,7 @@ export const CheckpointForm = (props: {
       <div className="flex w-full justify-between gap-4">
         <input
           defaultValue={checkpoint.title}
-          placeholder="Checkpoint title"
+          placeholder="Checkpoint title*"
           required={true}
           name={id + "/title"}
           className="text-xl outline-0 w-full placeholder-white"
