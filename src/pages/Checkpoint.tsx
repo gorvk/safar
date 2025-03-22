@@ -19,7 +19,7 @@ export const Checkpoint = () => {
         const detailData = await getItineraryDetailDataSF(id);
         data = detailData.checkpoints[parseInt(checkpointId)];
       }
-      data.things_to_try = data.things_to_try || []; 
+      data.things_to_try = data.things_to_try || [];
       setCheckpointData(data);
     }
   };
@@ -35,28 +35,25 @@ export const Checkpoint = () => {
   return (
     <>
       <div className="flex flex-col gap-2">
-        <div className="text-lg font-bold flex w-full gap-2 justify-between">
+        <div className="text-md font-bold flex w-full gap-2 justify-between">
           <div
             className="flex items-center w-2/3 gap-2 cursor-pointer"
             onClick={() => window.open(checkpointData.location_url, "_blank")}
           >
             <Location type="fill-black" />
-            {checkpointData.title.toUpperCase() + ","}
+            {checkpointData.title.toUpperCase()}
           </div>
           <MetadataBar uploadedDuration={checkpointData.visited_at} />
         </div>
         <hr className="text-app-sperator" />
-        <div className="text-md">
-          <SourceDestinationBar
-            source="Things to Try"
-            destination=""
-          />
+        <div className="text-sm">
+          <SourceDestinationBar source="Things to Try" destination="" />
         </div>
         <div>
           <ul className="flex flex-col">
             {checkpointData.things_to_try.map((thing, index) => (
               <li key={index}>
-                <div className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium text-md">
+                <div className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium text-sm">
                   {thing}
                 </div>
               </li>

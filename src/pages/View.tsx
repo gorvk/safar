@@ -54,7 +54,7 @@ export const View = () => {
             </button>
           )}
         </div>
-        <div className="text-md">
+        <div className="text-sm">
           <SourceDestinationBar
             source={data.source}
             destination={data.destination}
