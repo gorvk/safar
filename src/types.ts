@@ -28,9 +28,9 @@ export type TItineraryView = TItineraryDetailDTO & TItineraryFeedDTO;
 
 export type TCheckpoint = {
     title: string;
-    location_url: string;
+    location_url: string | undefined;
     visited_at: string;
-    things_to_try: string[];
+    things_to_try: string[] | undefined;
 };
 
 export type TSupabaseConfig = {

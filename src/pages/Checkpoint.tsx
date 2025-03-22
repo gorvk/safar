@@ -24,6 +24,12 @@ export const Checkpoint = () => {
     }
   };
 
+  const openUrl = (url: string | undefined) => {
+    if (url) {
+      window.open(url, "_blank")
+    }
+  }
+
   useEffect(() => {
     getCheckpointData();
   }, []);
@@ -38,7 +44,7 @@ export const Checkpoint = () => {
         <div className="text-md font-bold flex w-full gap-2 justify-between">
           <div
             className="flex items-center w-2/3 gap-2 cursor-pointer"
-            onClick={() => window.open(checkpointData.location_url, "_blank")}
+            onClick={() => openUrl(checkpointData.location_url)}
           >
             <Location type="fill-black" />
             {checkpointData.title.toUpperCase()}
@@ -51,7 +57,7 @@ export const Checkpoint = () => {
         </div>
         <div>
           <ul className="flex flex-col">
-            {checkpointData.things_to_try.map((thing, index) => (
+            {checkpointData.things_to_try?.map((thing, index) => (
               <li key={index}>
                 <div className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium text-sm">
                   {thing}
