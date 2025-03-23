@@ -1,12 +1,14 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { View } from "./pages/View";
-import { Checkpoint } from "./pages/Checkpoint";
-import { AddItinerary } from "./pages/AddItinerary";
-import { EditItinerary } from "./pages/EditItinerary";
 import { action } from "./components/Itinerary/ItineraryFormAction";
-import { Layout } from "./components/Layout/Layout";
-import { Profile } from "./pages/Profile";
+import {
+  Home,
+  View,
+  Checkpoint,
+  AddItinerary,
+  EditItinerary,
+  Layout,
+  Profile,
+} from "./pages";
 
 const routes: RouteObject[] = [
   {
