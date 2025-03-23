@@ -4,10 +4,19 @@ import { Back } from "../../Icons/Back";
 
 export const Titlebar = () => {
   const navigate = useNavigate();
+
+  const handleBack = () => {
+    if (history.length <= 2) {
+      navigate('/');
+      return;
+    }
+    navigate(-1);
+  }
+
   return (
     <div className="flex z-30 items-center border-b-1 border-app-sperator px-4 lg:px-12 py-3 w-full">
       {location.pathname !== "/" && (
-        <div className="cursor-pointer" onClick={() => navigate(-1)}>
+        <div className="cursor-pointer" onClick={handleBack}>
           <Back />
         </div>
       )}
