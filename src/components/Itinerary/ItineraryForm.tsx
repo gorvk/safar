@@ -83,7 +83,7 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
       setPhotos([...photos, ...newPhotos]);
     }
   };
-  if (user) {
+  if (!user) {
     return (
       <div className="flex m-auto font-bold items-center justify-center">
         <div className="flex p-2 justify-center items-end">
