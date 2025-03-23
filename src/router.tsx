@@ -15,7 +15,7 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "profile", element: <Profile /> },
+      { path: ":id/profile", element: <Profile /> },
       { path: "add", element: <AddItinerary />, action: action },
       { path: ":id/edit", element: <EditItinerary />, action: action },
       { path: ":id/view", element: <View /> },

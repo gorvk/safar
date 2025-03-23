@@ -38,7 +38,7 @@ const Menu = () => {
 
   const anonOptions = [{ label: "Login", handler: login }];
   const userOptions = [
-    { label: "Profile", handler: () => navigate("profile") },
+    { label: "Profile", handler: () => navigate(`${authState.user?.id}/profile`) },
     { label: "Logout", handler: logout },
   ];
 
@@ -46,7 +46,7 @@ const Menu = () => {
     <div className="relative">
       <button
         onClick={toggleMenu}
-        className="flex items-center justify-center w-10 h-10 bg-app-color text-white rounded-md"
+        className="flex items-center justify-center w-10 h-10 bg-app-color text-white rounded-md cursor-pointer"
       >
         <HamMenu />
       </button>
