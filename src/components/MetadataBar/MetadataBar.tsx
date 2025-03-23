@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import { getUserMetadata } from "../../svc/auth";
 import { getDate } from "../../utils";
 import { Profile } from "../../Icons/Profile";
+import { useNavigate } from "react-router-dom";
 
 export const MetadataBar = (props: {
   userId?: string;
   uploadedDuration: string;
 }) => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const { userId, uploadedDuration } = props;
   const formatedDate = getDate(uploadedDuration);
@@ -20,10 +22,23 @@ export const MetadataBar = (props: {
     })();
   }, []);
 
+  const navitgateToProfile = (
+    event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (userId) {
+      navigate(`/${userId}/profile`);
+    }
+  };
+
   return (
     <div className="flex items-center justify-between font-bold">
       {userId && (
-        <div className="flex items-center gap-2">
+        <div
+          onClick={navitgateToProfile}
+          className="flex items-center gap-2 cursor-pointer"
+        >
           <Profile /> {userName}
         </div>
       )}
