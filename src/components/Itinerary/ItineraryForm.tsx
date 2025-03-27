@@ -16,9 +16,13 @@ import { useDispatch, useSelector } from "react-redux";
 import loader from "../../redux/slices/loader";
 import { googleAuthSvc } from "../../svc/auth";
 import auth from "../../redux/slices/auth";
+import { DeleteItineraryButton } from "./DeleteItineraryButton";
 
-export const ItineraryForm = (props: { data?: TItineraryView }) => {
-  const { data } = props;
+export const ItineraryForm = (props: {
+  data?: TItineraryView;
+  isEditForm?: boolean;
+}) => {
+  const { data, isEditForm } = props;
   const user = useSelector((state: TAppState) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -148,29 +152,32 @@ export const ItineraryForm = (props: { data?: TItineraryView }) => {
       </div>
       <hr className="text-app-sperator" />
       <div className="flex flex-col gap-6 my-4">
-        <div className="flex gap-4 items-center">
-          <label className="cursor-pointer">
-            <input
-              ref={imageUploadInputRef}
-              className="hidden"
-              placeholder="none"
-              type="file"
-              accept="image"
-              name="photos"
-              onChange={(event) => getSelectedFileUrls(event.target.files)}
-              multiple={true}
-            />
-            <Image />
-          </label>
-          <div className="cursor-pointer" onClick={() => addCheckpoint()}>
-            <ListUI color="fill-app-color" />
+        {isEditForm && <DeleteItineraryButton id={data?.feed_id} />}
+        <div className="flex justify-between flex-col gap-4 md:flex-row md:items-center">
+          <div className="flex gap-4 items-center">
+            <label className="cursor-pointer">
+              <input
+                ref={imageUploadInputRef}
+                className="hidden"
+                placeholder="none"
+                type="file"
+                accept="image"
+                name="photos"
+                onChange={(event) => getSelectedFileUrls(event.target.files)}
+                multiple={true}
+              />
+              <Image />
+            </label>
+            <div className="cursor-pointer" onClick={() => addCheckpoint()}>
+              <ListUI color="fill-app-color" />
+            </div>
+            <button
+              type="submit"
+              className="bg-app-color py-1 text-sm min-w-14 rounded-lg font-bold text-white cursor-pointer"
+            >
+              POST
+            </button>
           </div>
-          <button
-            type="submit"
-            className="bg-app-color py-1 text-sm min-w-14 rounded-lg font-bold text-white cursor-pointer"
-          >
-            POST
-          </button>
         </div>
         {checkpoints.map((data, index) => (
           <CheckpointForm

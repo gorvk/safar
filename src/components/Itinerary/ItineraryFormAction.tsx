@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { db } from "../../supabase";
 import { TItineraryDetail, TCheckpoint, TItineraryView } from "../../types";
-import { addItinerary, editItinerary } from "../../svc/itineraryForm";
+import { addItinerarySF, editItinerarySF } from "../../svc/itineraryForm";
 import { store } from "../../redux/store";
 import loader from "../../redux/slices/loader";
 
@@ -20,13 +20,13 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formType = urlParts[urlParts.length - 1];
 
   if (formType === "add") {
-    const id = await addItinerary(payload);
+    const id = await addItinerarySF(payload);
     store.dispatch(loader.actions.setloader(false));
     if (id) {
       return redirect(`/${id}/view`);
     }
   } else if (formType === "edit" && params["id"]) {
-    await editItinerary(payload, params["id"]);
+    await editItinerarySF(payload, params["id"]);
     store.dispatch(loader.actions.setloader(false));
     return redirect(`/${params["id"]}/view`);
   }

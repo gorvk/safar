@@ -2,7 +2,7 @@ import { db } from "../supabase";
 import { TItineraryFeed, TItineraryFeedDTO, TItineraryDetail, TItineraryView } from "../types";
 import { getUserSvc } from "./auth";
 
-export const addItinerary = async (payload: TItineraryView): Promise<string | null> => {
+export const addItinerarySF = async (payload: TItineraryView): Promise<string | null> => {
   const feedData: TItineraryFeed = await getFeedDataPayload(payload);
   const { data, error } = await db
     .from("itinerary_feed")
@@ -18,7 +18,7 @@ export const addItinerary = async (payload: TItineraryView): Promise<string | nu
   return null;
 }
 
-export const editItinerary = async (payload: TItineraryView, id: string): Promise<void> => {
+export const editItinerarySF = async (payload: TItineraryView, id: string): Promise<void> => {
   const feedData: TItineraryFeed = await getFeedDataPayload(payload);
   const { data, error } = await db
     .from("itinerary_feed")
@@ -31,6 +31,15 @@ export const editItinerary = async (payload: TItineraryView, id: string): Promis
     await db.from("itinerary_detail").update(detailData).eq('feed_id', id);
   }
 }
+
+export const deleteItinerarySF = async (id: string) => {
+  const { error } = await db.from("itinerary_feed").delete().eq("id", id);
+  if (error) {
+    console.error(error);
+    return false;
+  }
+  return true;
+};
 
 const getDetailDataPayload = (
   payload: TItineraryView,
