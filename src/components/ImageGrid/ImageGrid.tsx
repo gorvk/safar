@@ -22,7 +22,7 @@ export const ImageGrid = (props: { photoUrls: string[] }) => {
       {photoUrls.map((url, index) => {
         const display = index === count ? "block" : "hidden";
         return (
-          <img key={url} src={url} className={"max-h-full m-auto " + display} />
+          <img key={index} src={url} className={"max-h-full m-auto " + display} />
         );
       })}
       <button
