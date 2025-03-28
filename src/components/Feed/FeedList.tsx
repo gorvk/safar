@@ -43,7 +43,7 @@ export const FeedList = (props: {
     <div className="mb-10">
       {feedState.data?.map((item, index) => (
         <React.Fragment key={item.id}>
-          {index > 0 && <hr className="text-app-sperator" />}
+          {index > 0 && <hr className="text-app-seperator" />}
           <FeedItem data={item} />
         </React.Fragment>
       ))}

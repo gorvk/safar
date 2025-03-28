@@ -1,17 +1,15 @@
 import { useState, useEffect, MouseEvent } from "react";
 import { getUserMetadata } from "../../svc/auth";
-import { getDate } from "../../utils";
 import { Profile } from "../../Icons/Profile";
 import { useNavigate } from "react-router-dom";
 
 export const MetadataBar = (props: {
   userId?: string;
-  uploadedDuration: string;
+  timeStamp: string;
 }) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
-  const { userId, uploadedDuration } = props;
-  const formatedDate = getDate(uploadedDuration);
+  const { userId, timeStamp } = props;
 
   useEffect(() => {
     (async () => {
@@ -42,7 +40,7 @@ export const MetadataBar = (props: {
           <Profile /> {userName}
         </div>
       )}
-      <div className="text-gray-500">{formatedDate}</div>
+      <div className="text-gray-500">{timeStamp}</div>
     </div>
   );
 };

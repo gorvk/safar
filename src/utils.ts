@@ -1,4 +1,5 @@
 import { debounceTimeInMS, pageSize } from "./constants";
+import { TTimepickerState } from "./types";
 
 export const getDate = (timeStamp: string) => {
     const date = new Date(timeStamp);
@@ -10,12 +11,8 @@ export const getDate = (timeStamp: string) => {
 
 export const getZeroedNumber = (num: number): string => num < 10 ? "0" + num : num.toString(); 
 
-// timeStamp -> toISOString()
-// from userInput: new Date('2024-09-10, 13:01').toISOString()
-// from DBInput: '2024-09-10T06:31:00.000Z'
-export const getTime = (timeStamp: string) => {
-    const date = new Date(timeStamp);
-    return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+export const getTime = (data: TTimepickerState): string => {
+    return `${data.hour}:${data.minute} ${data.meridiem}`;
 }
 
 export const debounce = <T>(

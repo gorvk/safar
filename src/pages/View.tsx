@@ -8,6 +8,7 @@ import { CheckpointList } from "../components/Checkpoint/CheckpointList";
 import { ImageGrid } from "../components/ImageGrid/ImageGrid";
 import { useDispatch, useSelector } from "react-redux";
 import loader from "../redux/slices/loader";
+import { getDate } from "../utils";
 
 export const View = () => {
   const { id } = useParams();
@@ -40,9 +41,9 @@ export const View = () => {
         <ImageGrid photoUrls={[data.thumbnail_url, ...data.photos]} />
         <MetadataBar
           userId={data.user_id}
-          uploadedDuration={data.uploaded_duration}
+          timeStamp={getDate(data.uploaded_duration)}
         />
-        <hr className="text-app-sperator" />
+        <hr className="text-app-seperator" />
         <div className="flex justify-between">
           <div className="text-md font-bold">{data.title}</div>
           {data.user_id === auth.user?.id && (
