@@ -17,7 +17,7 @@ export const EditItinerary = () => {
       detailData.uploaded_duration = getDate(detailData.uploaded_duration);
       detailData.checkpoints = detailData.checkpoints.map((checkpoint) => ({
         ...checkpoint,
-        visited_at: getDate(checkpoint.visited_at),
+        visited_date: getDate(checkpoint.visited_date),
       }));
       setData(detailData);
     }

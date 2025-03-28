@@ -19,9 +19,9 @@ export const Datepicker = (props: {
   const [value, setValue] = useState<string>(defaultValue || currentDate);
 
   return (
-    <div className="flex relative max-w-80">
-      <label className={`text-md w-2/3 truncate ${labelColor}`}>
-        {`Journey date${required ? '*' : ''}: `}
+    <div className="flex text-md relative max-w-80">
+      <label className={`w-2/3 truncate ${labelColor}`}>
+        {`Date: ${required ? '*' : ''} `}
       </label>
       <input
         type="date"
@@ -29,7 +29,7 @@ export const Datepicker = (props: {
         value={value}
         required={required}
         onChange={(event) => setValue(event.target.value)}
-        className={`outline-0 text-md ${scheme}`}
+        className={`outline-0 ${scheme}`}
       />
     </div>
   );

@@ -3,6 +3,7 @@ import { ListUI } from "../../Icons/ListUl";
 import { Trash } from "../../Icons/Trash";
 import { TCheckpoint, TListItem } from "../../types";
 import { Datepicker } from "./Datepicker";
+import { Timepicker } from "./Timepicker";
 
 export const CheckpointForm = (props: {
   data: TListItem<TCheckpoint>;
@@ -49,8 +50,16 @@ export const CheckpointForm = (props: {
         scheme="scheme-dark"
         labelColor="text-white"
         required={true}
-        defaultValue={checkpoint.visited_at}
-        name={id + "/visited_at"}
+        defaultValue={checkpoint.visited_date}
+        name={id + "/visited_date"}
+      />
+      <Timepicker
+        name={id}
+        defaultValue={{
+          hour: checkpoint.visited_hour,
+          minute: checkpoint.visited_minute,
+          meridiem: checkpoint.visited_meridiem,
+        }}
       />
       {thingsToTry.map((thing) => (
         <input

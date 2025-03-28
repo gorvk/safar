@@ -29,7 +29,10 @@ export type TItineraryView = TItineraryDetailDTO & TItineraryFeedDTO;
 export type TCheckpoint = {
     title: string;
     location_url: string | undefined;
-    visited_at: string;
+    visited_date: string;
+    visited_hour: string;
+    visited_minute: string;
+    visited_meridiem: string;
     things_to_try: string[] | undefined;
 };
 
@@ -60,4 +63,10 @@ export type TAppState = {
     loader: boolean;
     auth: TAuthState;
     feed: TFeedState;
-} 
+}
+
+export type TTimepickerState = {
+    hour: string;
+    minute: string;
+    meridiem: string;
+};

@@ -60,7 +60,10 @@ export const ItineraryForm = (props: {
           things_to_try: [],
           location_url: "",
           title: "",
-          visited_at: "",
+          visited_date: "",
+          visited_hour: "",
+          visited_minute: "",
+          visited_meridiem: "",
         },
       } as TListItem<TCheckpoint>,
     ]);
@@ -150,7 +153,7 @@ export const ItineraryForm = (props: {
           />
         ))}
       </div>
-      <hr className="text-app-sperator" />
+      <hr className="text-app-seperator" />
       <div className="flex flex-col gap-6 my-4">
         {isEditForm && <DeleteItineraryButton id={data?.feed_id} />}
         <div className="flex justify-between flex-col gap-4 md:flex-row md:items-center">
@@ -161,7 +164,7 @@ export const ItineraryForm = (props: {
                 className="hidden"
                 placeholder="none"
                 type="file"
-                accept="image"
+                accept="image/*"
                 name="photos"
                 onChange={(event) => getSelectedFileUrls(event.target.files)}
                 multiple={true}

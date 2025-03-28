@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { TItineraryFeedDTO } from "../../types";
 import { SourceDestinationBar } from "../SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../MetadataBar/MetadataBar";
+import { getDate } from "../../utils";
 
 export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
   const { data } = props;
@@ -16,7 +17,7 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
         <div className="text-md">
           <MetadataBar
             userId={data.user_id}
-            uploadedDuration={data.uploaded_duration}
+            timeStamp={getDate(data.uploaded_duration)}
           />
         </div>
         <div className="w-full relative m-auto rounded-xl h-90 bg-black flex items-center my-4">

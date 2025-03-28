@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
 import { Location } from "../Icons/Location";
+import { getDate, getTime } from "../utils";
 
 export const Checkpoint = () => {
   const location = useLocation();
@@ -43,18 +44,25 @@ export const Checkpoint = () => {
         <div className="font-bold items-center w-full">
           {checkpointData.title.toUpperCase()}
         </div>
-        {/* <hr className="text-app-sperator" /> */}
-        <div className="flex w-full gap-2 justify-between">
+        <div className="flex text-sm w-full gap-2 justify-between">
           <div
             onClick={() => openUrl(checkpointData.location_url)}
-            className="flex text-sm gap-1 rounded-md justify-evenly items-center cursor-pointer"
+            className="flex text-sm gap-1 min-w-20 rounded-md justify-evenly items-center cursor-pointer"
           >
-            <div className="text-app-color font-medium underline">view on maps</div>
+            <div className="text-app-color font-medium underline truncate">
+              view on maps
+            </div>
             <Location type="fill-app-color" />
           </div>
-          <MetadataBar uploadedDuration={checkpointData.visited_at} />
+          <MetadataBar
+            timeStamp={`${getDate(checkpointData.visited_date)}, ${getTime({
+              hour: checkpointData.visited_hour,
+              minute: checkpointData.visited_minute,
+              meridiem: checkpointData.visited_meridiem,
+            })}`}
+          />
         </div>
-        <hr className="text-app-sperator" />
+        <hr className="text-app-seperator" />
         <div>
           <ul className="flex flex-col">
             {checkpointData.things_to_try?.map((thing, index) => (
