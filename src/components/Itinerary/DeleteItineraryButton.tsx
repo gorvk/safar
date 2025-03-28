@@ -35,15 +35,15 @@ export const DeleteItineraryButton = (props: { id: string | undefined }) => {
         <div className="flex gap-3 items-center">
           <button
             onClick={closeConfirmation}
-            className="bg-app-color h-7 py-1 text-sm min-w-28 rounded-lg font-bold text-white uppercase cursor-pointer"
+            className="bg-app-color h-7 py-1 text-sm min-w-15 outline-none rounded-lg font-bold text-white uppercase cursor-pointer"
           >
-            Cancel
+            No
           </button>
           <button
             onClick={deleteItinerary}
-            className="bg-app-color h-7 py-1 text-sm min-w-28 rounded-lg font-bold text-white uppercase cursor-pointer"
+            className="bg-app-color h-7 py-1 text-sm min-w-15 outline-none rounded-lg font-bold text-white uppercase cursor-pointer"
           >
-            Delete
+            Yes
           </button>
         </div>
       </div>

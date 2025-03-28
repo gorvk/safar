@@ -8,9 +8,11 @@ export const Timepicker = (props: {
 }) => {
   const { name, defaultValue } = props;
 
-  const [state, setState] = useState(
-    defaultValue || { hour: "05", minute: "00", meridiem: "am" }
-  );
+  const [state, setState] = useState({
+    hour: defaultValue?.hour || "05",
+    minute: defaultValue?.minute || "00",
+    meridiem: defaultValue?.meridiem || "am",
+  });
 
   const handleChange = (
     key: keyof TTimepickerState,
