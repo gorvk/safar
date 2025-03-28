@@ -8,11 +8,13 @@ import {
   EditItinerary,
   Layout,
   Profile,
+  Error,
 } from "./pages";
 
 const routes: RouteObject[] = [
   {
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
       { path: ":id/profile", element: <Profile /> },
