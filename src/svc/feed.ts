@@ -1,5 +1,5 @@
 import { db } from "../supabase";
-import { TItineraryFeedDTO, TItineraryView } from "../types";
+import { TCheckpoint, TItineraryFeedDTO, TItineraryView } from "../types";
 import { getPaginatationIndex } from "../utils";
 
 export const getItineraryFeedDataSF = async (pageNumber?: number): Promise<{ data: TItineraryFeedDTO[], count: number }> => {
@@ -39,6 +39,17 @@ export const getItineraryDetailDataSF = async (id: string): Promise<TItineraryVi
     }
 
     return data[0] as TItineraryView;
+};
+
+export const getItineraryCheckpointDataSF = async (id: string): Promise<TCheckpoint[]> => {
+    const { data, error } = await db.from("itinerary_feed").select("...itinerary_detail(checkpoints)").eq("id", id);
+
+    if (error || !data) {
+        console.error(error);
+        return [];
+    }
+
+    return data[0].checkpoints as TCheckpoint[];
 };
 
 export const searchFeedSF = async (query: string, pageNumber?: number): Promise<{ data: TItineraryFeedDTO[], count: number }> => {

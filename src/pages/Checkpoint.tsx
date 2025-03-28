@@ -1,28 +1,25 @@
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
 import { TCheckpoint } from "../types";
-import { useLocation, useParams } from "react-router-dom";
-import { getItineraryDetailDataSF } from "../svc/feed";
-import { useEffect, useState } from "react";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { getItineraryCheckpointDataSF } from "../svc/feed";
 import { Location } from "../Icons/Location";
 import { getDate, getTime } from "../utils";
+import loader from "../redux/slices/loader";
+import { store } from "../redux/store";
 
-export const Checkpoint = () => {
-  const location = useLocation();
-  const { id, checkpointId } = useParams();
-  const [checkpointData, setCheckpointData] = useState<TCheckpoint>();
+export async function clientLoader({ params }: LoaderFunctionArgs) {
+  const { id, checkpointId } = params;
+  if (id && checkpointId) {
+    store.dispatch(loader.actions.setloader(true));
+    const checkpoints = await getItineraryCheckpointDataSF(id);
+    const data = checkpoints[parseInt(checkpointId)];
+    store.dispatch(loader.actions.setloader(false));
+    return data;
+  }
+}
 
-  const getCheckpointData = async () => {
-    if (id && checkpointId) {
-      const { state } = location;
-      let data: TCheckpoint = state?.data;
-      if (!data) {
-        const detailData = await getItineraryDetailDataSF(id);
-        data = detailData.checkpoints[parseInt(checkpointId)];
-      }
-      data.things_to_try = data.things_to_try || [];
-      setCheckpointData(data);
-    }
-  };
+const Checkpoint = () => {
+  const checkpointData = useLoaderData() as TCheckpoint | undefined;
 
   const openUrl = (url: string | undefined) => {
     if (url) {
@@ -30,13 +27,7 @@ export const Checkpoint = () => {
     }
   };
 
-  useEffect(() => {
-    getCheckpointData();
-  }, []);
-
-  if (!checkpointData) {
-    return <></>;
-  }
+  if (!checkpointData) return <></>;
 
   return (
     <>
@@ -78,3 +69,5 @@ export const Checkpoint = () => {
     </>
   );
 };
+
+export default Checkpoint;

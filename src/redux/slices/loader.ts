@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: boolean = false;
+const initialState: boolean = true;
 export default createSlice({
     name: "loader",
     initialState,

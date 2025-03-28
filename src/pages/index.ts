@@ -1,8 +1,3 @@
 export { AddItinerary } from "./AddItinerary"
-export { Checkpoint } from "./Checkpoint"
-export { EditItinerary } from "./EditItinerary"
 export { Home } from "./Home"
-export { Layout } from "./Layout"
-export { Profile } from "./Profile"
-export { View } from "./View"
 export { Error } from "./Error"
