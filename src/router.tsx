@@ -5,13 +5,13 @@ import {
   AddItinerary,
   Error,
 } from "./pages";
+import { Legal } from "./pages/Legal";
 import View, { clientLoader as viewPageLoader } from "./pages/View";
 import EditItinerary, {clientLoader as editPageLoader} from "./pages/EditItinerary";
 import Profile, {clientLoader as profilePageLoader} from "./pages/Profile";
 import Checkpoint, {clientLoader as checkpointPageLoader} from "./pages/Checkpoint";
 import Layout, {clientLoader as layoutLoader} from "./pages/Layout";
-import { Legal } from "./pages/Legal";
-import { About } from "./pages/About"
+import { About } from "./pages/About";
 
 const routes: RouteObject[] = [
   {

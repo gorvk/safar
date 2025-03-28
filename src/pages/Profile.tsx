@@ -1,17 +1,17 @@
-import { getPrfoileItineraryFeedDataSF } from "../svc/feed";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { TAppState, TUserDTO } from "../types";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { FeedList } from "../components/Feed/FeedList";
-import { getUserMetadata, updateUserMetaData } from "../svc/auth";
-import { Profile as ProfileIcon } from "../Icons/Profile";
-import { addToStorageBucketSF, getBucketFileUrlSF } from "../svc/storage";
+import { Edit } from "../Icons/Edit";
 import auth from "../redux/slices/auth";
 import { useState } from "react";
 import feed from "../redux/slices/feed";
 import loader from "../redux/slices/loader";
 import { store } from "../redux/store";
-import { Edit } from "../Icons/Edit";
+import { getUserMetadata, updateUserMetaData } from "../svc/auth";
+import { getPrfoileItineraryFeedDataSF } from "../svc/feed";
+import { addToStorageBucketSF, getBucketFileUrlSF } from "../svc/storage";
+import { TUserDTO, TAppState } from "../types";
+import { Profile as ProfileIcon } from "../Icons/Profile";
 
 export async function clientLoader({
   params,
@@ -27,19 +27,19 @@ export async function clientLoader({
   );
   if (id) {
     store.dispatch(loader.actions.setloader(true));
-    const userName = await getUserMetadata(id);
+    const userMetadata = await getUserMetadata(id);
     const { data, count } = await getPrfoileItineraryFeedDataSF(id);
     const feedState = store.getState().feed;
     store.dispatch(feed.actions.setFeed({ ...feedState, count, data }));
     store.dispatch(loader.actions.setloader(false));
-    return userName;
+    return userMetadata;
   }
   return null;
 }
 
 const Profile = () => {
-  const userName = useLoaderData() as TUserDTO | null;
-  const [profileData, setProfileData] = useState<TUserDTO | null>(userName);
+  const loaderData = useLoaderData() as (TUserDTO | null);
+  const [profileData, setProfileData] = useState<TUserDTO | null>(loaderData);
   const [userNameInput, toggleUserNameInput] = useState<boolean>(false);
   const { user: authState } = useSelector((state: TAppState) => state.auth);
   const feedState = useSelector((state: TAppState) => state.feed);

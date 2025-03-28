@@ -33,7 +33,6 @@ const EditItinerary = () => {
   const auth = useSelector((state: TAppState) => state.auth);
 
   if (!data) return <></>;
-
   if (data.user_id !== auth.user?.user_id) return <Navigate to={`/${id}/view`} />;
 
   return <ItineraryForm data={data} isEditForm={true} />;
