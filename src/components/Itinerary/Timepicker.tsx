@@ -27,7 +27,7 @@ export const Timepicker = (props: {
   return (
     <div className="flex relative max-w-80 gap-4 text-md">
       <label className="text-md w-2/3 truncate text-white">{`Time: * `}</label>
-      <div className="flex">
+      <div className="flex gap-0.5 justify-between">
         <div>
           <select
             name={`${name}/visited_hour`}
