@@ -1,4 +1,4 @@
-# ISAFAR - A Sharable Itinerary
+# TOORIST - A Sharable Itinerary
 
 ## Tech stack
 - React
