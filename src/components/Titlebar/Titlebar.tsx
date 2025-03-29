@@ -11,7 +11,7 @@ export const Titlebar = () => {
         className="m-auto cursor-pointer"
         onClick={() => navigate("/")}
       >
-        <img src="/logo.svg" className="max-w-none w-35 m-auto" />
+        <img src="/title.svg" className="max-w-none w-35 m-auto" />
       </div>
     </div>
   );

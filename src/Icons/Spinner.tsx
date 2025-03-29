@@ -6,7 +6,7 @@ export const Spinner = () => {
     >
       <div>
         <img
-          src="/spinner.svg"
+          src="/logo-app-color.svg"
           className="max-w-none w-30 m-auto outline-none animate-spin"
         />
       </div>
