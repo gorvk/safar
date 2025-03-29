@@ -4,15 +4,18 @@ import { getItineraryDetailDataSF } from "../svc/feed";
 import { useEffect, useState } from "react";
 import { TAppState, TItineraryView } from "../types";
 import { getDate } from "../utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import loader from "../redux/slices/loader";
 
 export const EditItinerary = () => {
   const { id } = useParams();
   const [data, setData] = useState<TItineraryView>();
   const auth = useSelector((state: TAppState) => state.auth);
+  const dispatch = useDispatch();
 
   const getItineraryDetailData = async () => {
     if (id) {
+      dispatch(loader.actions.setloader(true));
       const detailData = await getItineraryDetailDataSF(id);
       detailData.uploaded_duration = getDate(detailData.uploaded_duration);
       detailData.checkpoints = detailData.checkpoints.map((checkpoint) => ({
@@ -20,6 +23,7 @@ export const EditItinerary = () => {
         visited_date: getDate(checkpoint.visited_date),
       }));
       setData(detailData);
+      dispatch(loader.actions.setloader(false));
     }
   };
 
