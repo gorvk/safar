@@ -28,18 +28,16 @@ export const Layout = () => {
   }, []);
 
   return (
-    <>
-      <div className="absolute left-0 right-0 w-full min-h-full border-x-1 border-app border-app-seperator mx-auto lg:max-w-3/5">
-        <Titlebar />
-        {loaderState && (
-          <div className="z-20 absolute w-full h-full bg-white">
-            <Spinner />
-          </div>
-        )}
-        <div className="m-4 lg:m-12">
-          <Outlet />
+    <div className="absolute left-0 right-0 w-full min-h-full border-x-1 border-app bg-white border-app-seperator mx-auto lg:max-w-3/5">
+      <Titlebar />
+      {loaderState && (
+        <div className="z-20 absolute w-full h-full bg-white">
+          <Spinner />
         </div>
+      )}
+      <div className="m-4 lg:m-12">
+        <Outlet />
       </div>
-    </>
+    </div>
   );
 };

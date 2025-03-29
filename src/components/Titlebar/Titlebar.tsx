@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { appName } from "../../constants";
 import { BackButton } from "./BackButton";
 
 export const Titlebar = () => {
@@ -9,10 +8,10 @@ export const Titlebar = () => {
     <div className="flex z-30 items-center border-b-1 border-app-seperator px-4 lg:px-12 py-3 w-full">
       <BackButton />
       <div
-        className="font-bold text-app-color text-xl uppercase m-auto max-w-25 text-center cursor-pointer"
+        className="m-auto cursor-pointer"
         onClick={() => navigate("/")}
       >
-        {appName}
+        <img src="/logo.svg" className="max-w-none w-35 m-auto" />
       </div>
     </div>
   );
