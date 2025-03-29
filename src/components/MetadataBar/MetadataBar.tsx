@@ -40,7 +40,7 @@ export const MetadataBar = (props: {
           <Profile /> {userName}
         </div>
       )}
-      <div className="text-gray-500">{timeStamp}</div>
+      <div className="text-app-color-light">{timeStamp}</div>
     </div>
   );
 };
