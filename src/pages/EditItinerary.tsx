@@ -8,8 +8,8 @@ import { ItineraryForm } from "../components/Itinerary/ItineraryForm";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { TAppState, TItineraryView } from "../types";
 import { getDate } from "../utils";
-import { useSelector } from "react-redux";
 import { store } from "../redux/store";
+import { useSelector } from "react-redux";
 import loader from "../redux/slices/loader";
 
 export async function clientLoader({ params }: LoaderFunctionArgs) {
