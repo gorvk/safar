@@ -21,9 +21,9 @@ export const Profile = () => {
 
   const getPrfoileItineraryFeedData = async () => {
     if (id) {
+      dispatch(loader.actions.setloader(true));
       const userName = await getUserMetadata(id);
       setUserName(userName);
-      dispatch(loader.actions.setloader(true));
       const { data, count } = await getPrfoileItineraryFeedDataSF(id);
       dispatch(feed.actions.setFeed({ ...feedState, count, data }));
       dispatch(loader.actions.setloader(false));
