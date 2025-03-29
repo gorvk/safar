@@ -30,7 +30,7 @@ export const SearchBar = () => {
     debounce<React.ChangeEvent<HTMLInputElement>>(searchItinerary);
 
   return (
-    <div className="h-11 px-4 w-full flex items-center bg-app-color-light justify-between rounded-xl">
+    <div className="h-11 px-4 w-full flex items-center bg-app-seperator justify-between rounded-xl">
       <input
         type="text"
         className="w-full px-2 py-2 bg-transparent focus:outline-none"

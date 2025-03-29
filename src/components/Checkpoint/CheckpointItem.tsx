@@ -28,7 +28,7 @@ export const CheckpointItem = (props: {
         className="my-1 bg-app-color py-2 px-3 rounded-lg flex justify-between cursor-pointer text-white"
       >
         <div className="flex gap-4 items-center w-3/5">
-          <Location type="fill-app-secondary-color" />
+          <Location />
           <div className="truncate font-bold">{data.title}</div>
         </div>
         <div>

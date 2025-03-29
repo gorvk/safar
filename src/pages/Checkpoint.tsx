@@ -40,10 +40,10 @@ const Checkpoint = () => {
             onClick={() => openUrl(checkpointData.location_url)}
             className="flex text-sm gap-1 min-w-20 rounded-md justify-evenly items-center cursor-pointer"
           >
-            <div className="text-app-color font-medium underline truncate">
+            <div className="text-app-secondary-color font-bold underline truncate">
               view on maps
             </div>
-            <Location type="fill-app-color" />
+            <Location />
           </div>
           <MetadataBar
             timeStamp={`${getDate(checkpointData.visited_date)}, ${getTime({
