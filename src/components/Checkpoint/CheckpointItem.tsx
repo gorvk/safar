@@ -25,11 +25,11 @@ export const CheckpointItem = (props: {
             state: { data },
           })
         }
-        className="my-1 bg-app-color py-2 px-3 rounded-lg text-white font-medium flex justify-between cursor-pointer"
+        className="my-1 bg-app-color py-2 px-3 rounded-lg flex justify-between cursor-pointer text-white"
       >
         <div className="flex gap-4 items-center w-3/5">
-          <Location type="fill-white" />
-          <div className="truncate">{data.title}</div>
+          <Location type="fill-app-secondary-color" />
+          <div className="truncate font-bold">{data.title}</div>
         </div>
         <div>
           <div>{date}</div>

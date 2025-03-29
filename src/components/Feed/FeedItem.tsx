@@ -23,7 +23,7 @@ export const FeedItem = (props: { data: TItineraryFeedDTO }) => {
         <div className="w-full relative m-auto rounded-xl h-90 bg-black flex items-center my-4">
           <img className="max-h-full m-auto" src={data.thumbnail_url} />
         </div>
-        <div className="text-md font-bold truncate">{data.title}</div>
+        <div className="text-md mb-0.5 font-bold truncate">{data.title}</div>
         <div className="text-sm">
           <SourceDestinationBar
             source={data.source}

@@ -51,7 +51,7 @@ const Profile = () => {
           {userName}
         </span>
       </div>
-      <hr className="mt-2 mb-4" />
+      <hr className="mt-2 mb-4 text-app-seperator" />
       <div>
         <span className="text-lg font-medium">Posts -</span>
         <FeedList

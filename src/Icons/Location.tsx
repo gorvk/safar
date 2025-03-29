@@ -1,4 +1,4 @@
-export const Location = (props: { type: "fill-white" | "fill-app-color" }) => {
+export const Location = (props: { type: "fill-app-secondary-color" | "fill-app-color" }) => {
   const { type } = props;
   return (
     <svg
