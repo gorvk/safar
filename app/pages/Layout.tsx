@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { Spinner } from "../Icons/Spinner";
 import { useSelector } from "react-redux";
 import { TAppState } from "../types";

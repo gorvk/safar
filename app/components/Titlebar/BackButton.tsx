@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Back } from "../../Icons/Back";
 
 export const BackButton = () => {

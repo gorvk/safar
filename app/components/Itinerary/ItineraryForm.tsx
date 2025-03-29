@@ -10,7 +10,7 @@ import {
   TUUID,
 } from "../../types";
 import { ImageItem } from "./ImageItem";
-import { Form } from "react-router-dom";
+import { Form } from "react-router";
 import { Datepicker } from "./Datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import loader from "../../redux/slices/loader";

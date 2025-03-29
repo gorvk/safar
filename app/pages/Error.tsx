@@ -3,7 +3,7 @@ import {
   useRouteError,
   isRouteErrorResponse,
   Navigate,
-} from "react-router-dom";
+} from "react-router";
 
 export const Error = () => {
   const navigate = useNavigate();

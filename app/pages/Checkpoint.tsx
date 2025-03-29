@@ -1,6 +1,6 @@
 import { MetadataBar } from "../components/MetadataBar/MetadataBar";
 import { TCheckpoint } from "../types";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router";
 import { getItineraryCheckpointDataSF } from "../svc/feed";
 import { Location } from "../Icons/Location";
 import { getDate, getTime } from "../utils";

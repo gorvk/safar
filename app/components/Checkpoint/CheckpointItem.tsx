@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { TCheckpoint } from "../../types";
 import { getDate, getTime } from "../../utils";
 import { Location } from "../../Icons/Location";

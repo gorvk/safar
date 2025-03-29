@@ -3,7 +3,7 @@ import {
   Navigate,
   useLoaderData,
   useParams,
-} from "react-router-dom";
+} from "react-router";
 import { ItineraryForm } from "../components/Itinerary/ItineraryForm";
 import { getItineraryDetailDataSF } from "../svc/feed";
 import { TAppState, TItineraryView } from "../types";

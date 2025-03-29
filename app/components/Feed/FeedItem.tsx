@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { TItineraryFeedDTO } from "../../types";
 import { SourceDestinationBar } from "../SourceDestinationBar/SourceDestinationBar";
 import { MetadataBar } from "../MetadataBar/MetadataBar";

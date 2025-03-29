@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, redirect } from "react-router-dom";
+import { ActionFunctionArgs, redirect } from "react-router";
 import { TItineraryDetail, TCheckpoint, TItineraryView } from "../../types";
 import { addItinerarySF, editItinerarySF } from "../../svc/itineraryForm";
 import { store } from "../../redux/store";

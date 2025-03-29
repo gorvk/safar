@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TAppState } from "../../types";
 import loader from "../../redux/slices/loader";
 import auth from "../../redux/slices/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { HamMenu } from "../../Icons/HamMenu";
 
 const Menu = () => {
