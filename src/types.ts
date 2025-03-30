@@ -70,3 +70,11 @@ export type TTimepickerState = {
     minute: string;
     meridiem: string;
 };
+
+export type TSectionData = {
+    title: string;
+    subTitles: string[];
+    thumbnailUrl: string;
+    isReversed: boolean;
+    isThumbnailScrollable: boolean;
+}

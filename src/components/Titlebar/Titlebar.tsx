@@ -5,7 +5,7 @@ export const Titlebar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex z-30 items-center border-b-1 border-app-seperator px-4 lg:px-12 py-3 w-full">
+    <div className="flex z-30 items-center border-b-1 bg-white border-app-seperator px-4 lg:px-12 py-3 w-full">
       <BackButton />
       <div
         className="m-auto cursor-pointer"
