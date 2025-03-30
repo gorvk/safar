@@ -38,9 +38,13 @@ const Menu = () => {
 
   const anonOptions = [{ label: "Login", handler: login }];
   const userOptions = [
-    { label: "Profile", handler: () => navigate(`${authState.user?.id}/profile`) },
+    {
+      label: "Profile",
+      handler: () => navigate(`${authState.user?.id}/profile`),
+    },
     { label: "Logout", handler: logout },
   ];
+  const commonOptions = [{ label: "About", handler: () => navigate("/about") }];
 
   return (
     <div className="relative">
@@ -52,10 +56,14 @@ const Menu = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 w-40 shadow-md rounded-md mt-4">
-          <ul className="flex flex-col gap-0.5 z-10">
-            {(!authState.user ? anonOptions : userOptions).map((option) => (
+        <div className="absolute right-0 w-40 shadow-md rounded-md mt-3">
+          <ul className="flex flex-col z-10">
+            {[
+              ...(!authState.user ? anonOptions : userOptions),
+              ...commonOptions,
+            ].map((option, index) => (
               <li className="z-10">
+                {index !== 0 && <hr className="text-app-color-light"/>}
                 <Option label={option.label} handler={option.handler} />
               </li>
             ))}
