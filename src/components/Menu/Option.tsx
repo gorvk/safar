@@ -3,7 +3,7 @@ export const Option = (props: { label: string; handler: () => void }) => {
   return (
     <div
       onClick={handler}
-      className="text-sm px-4 py-2 bg-app-color rounded-md text-white cursor-pointer"
+      className="text-sm px-4 py-2 bg-app-color text-white font-medium cursor-pointer"
     >
       {label}
     </div>
