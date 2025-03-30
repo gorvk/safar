@@ -10,6 +10,8 @@ import EditItinerary, {clientLoader as editPageLoader} from "./pages/EditItinera
 import Profile, {clientLoader as profilePageLoader} from "./pages/Profile";
 import Checkpoint, {clientLoader as checkpointPageLoader} from "./pages/Checkpoint";
 import Layout, {clientLoader as layoutLoader} from "./pages/Layout";
+import { Legal } from "./pages/Legal";
+import { About } from "./pages/About"
 
 const routes: RouteObject[] = [
   {
@@ -25,6 +27,8 @@ const routes: RouteObject[] = [
       { path: ":id/profile", element: <Profile />, loader: profilePageLoader },
     ],
   },
+  { path: "about", element: <About /> },
+  { path: "legal", element: <Legal /> },
 ];
 
 export const router = createBrowserRouter(routes);
