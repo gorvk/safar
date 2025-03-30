@@ -4,6 +4,7 @@ import { Titlebar } from "../components/Titlebar/Titlebar";
 import { TSectionData } from "../types";
 import { ConclusionSection } from "../components/Landing/ConclusionSection";
 import { Footer } from "../components/Landing/Footer";
+import { useNavigate } from "react-router-dom";
 
 export const About = () => {
   const sectionsData: TSectionData[] = [
@@ -41,11 +42,18 @@ export const About = () => {
       isThumbnailScrollable: false,
     },
   ];
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="fixed w-full z-20">
+      <div className="fixed flex w-full z-20">
         <Titlebar />
+        <div
+          onClick={() => navigate("/")}
+          className="absolute z-30 cursor-pointer text-xl font-bold text-white animate-pulse shadow-md text-center w-40 p-2 m-0.5 rounded-md bg-app-color border-1 border-app-seperator right-0"
+        >
+          Try now
+        </div>
       </div>
       <div className="absolute w-full h-fit pt-20 flex flex-col gap-10 items-center">
         {sectionsData.map((data, index) => (
