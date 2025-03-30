@@ -5,4 +5,24 @@
   --color-app-secondary-color: #ff9d47;
   --color-app-color-light: #536471;
   --color-app-seperator: #dbdbdb;
+  --animate-scroll: scrollUpDown ease-in 10s infinite;
+  --animate-custom-bounce: bounce 1s infinite;
+}
+
+@keyframes scrollUpDown {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(-15%);
+  }
+  50% {
+    transform: translateY(-30%);
+  }
+  75% {
+    transform: translateY(-15%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

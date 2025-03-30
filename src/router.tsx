@@ -9,7 +9,9 @@ import {
   Layout,
   Profile,
   Error,
+  About,
 } from "./pages";
+import { Legal } from "./pages/Legal";
 
 const routes: RouteObject[] = [
   {
@@ -24,6 +26,8 @@ const routes: RouteObject[] = [
       { path: ":id/:checkpointId/view", element: <Checkpoint /> },
     ],
   },
+  { path: "about", element: <About /> },
+  { path: "legal", element: <Legal /> },
 ];
 
 export const router = createBrowserRouter(routes);

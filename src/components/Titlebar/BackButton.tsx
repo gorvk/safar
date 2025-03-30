@@ -12,7 +12,7 @@ export const BackButton = () => {
     navigate(-1);
   };
 
-  if (location.pathname === "/") {
+  if (location.pathname === "/" || location.pathname === "/about") {
     return <></>;
   }
   return (
