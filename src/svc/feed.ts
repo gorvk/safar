@@ -45,7 +45,7 @@ export const searchFeedSF = async (query: string, pageNumber?: number): Promise<
     const { start, end } = getPaginatationIndex(pageNumber);
     const { data, error, count } = await db.from("itinerary_feed")
         .select<"*", TItineraryFeedDTO>("*", { count: 'exact' })
-        .textSearch("itinerary_feed_search", `${query}:*`).range(start, end - 1);
+        .textSearch("itinerary_feed_search", `${query}:*`, { type: "websearch" }).range(start, end - 1);
 
     if (!count) {
         if (error) console.error(error);

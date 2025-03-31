@@ -1,9 +1,9 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
-import { db } from "../../supabase";
 import { TItineraryDetail, TCheckpoint, TItineraryView } from "../../types";
 import { addItinerarySF, editItinerarySF } from "../../svc/itineraryForm";
 import { store } from "../../redux/store";
 import loader from "../../redux/slices/loader";
+import { addToStorageBucketSF, getBucketFileUrlSF } from "../../svc/storage";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   store.dispatch(loader.actions.setloader(true));
@@ -38,13 +38,9 @@ const getPhotoUrls = async (photos: string[]): Promise<string[]> => {
   const photoURLs: string[] = [];
   for (const photo of photos) {
     let current = photo;
-    if (photo.split(":")[0] === "blob") {
-      const blob = await fetch(current).then((r) => r.blob());
-      const resourceName = crypto.randomUUID();
-      await db.storage.from("itinerary-images").upload(resourceName, blob);
-      const { data } = await db.storage
-        .from("itinerary-images")
-        .getPublicUrl(resourceName);
+    if (current.split(":")[0] === "blob") {
+      const resourceName = await addToStorageBucketSF(current, "itinerary-images");
+      const data = await getBucketFileUrlSF(resourceName, "itinerary-images")
       current = data.publicUrl;
     }
     photoURLs.push(current);
