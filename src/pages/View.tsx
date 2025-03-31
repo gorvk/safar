@@ -36,35 +36,37 @@ const View = () => {
   if (!data.checkpoints) data.checkpoints = [];
 
   return (
-    <div className="flex flex-col gap-3">
-      <ImageGrid photoUrls={[data.thumbnail_url, ...data.photos]} />
-      <MetadataBar
-        userId={data.user_id}
-        timeStamp={getDate(data.uploaded_duration)}
-      />
-      <hr className="text-app-seperator" />
-      <div className="flex justify-between">
-        <div className="text-md font-bold">{data.title}</div>
-        {data.user_id === auth.user?.id && (
-          <button
-            onClick={() => navigate(`/${id}/edit`)}
-            className="bg-app-color text-sm uppercase py-1 min-w-14 h-fit rounded-lg font-bold text-white cursor-pointer"
-          >
-            Edit
-          </button>
-        )}
-      </div>
-      <div className="text-sm">
-        <SourceDestinationBar
-          source={data.source}
-          destination={data.destination}
+    <>
+      <div className="flex flex-col gap-3">
+        <ImageGrid photoUrls={[data.thumbnail_url, ...data.photos]} />
+        <MetadataBar
+          userId={data.user_id}
+          timeStamp={getDate(data.uploaded_duration)}
         />
-        <CheckpointList
-          checkpoints={data.checkpoints}
-          itineraryId={data.feed_id}
-        />
+        <hr className="text-app-seperator" />
+        <div className="flex justify-between">
+          <div className="text-md font-bold">{data.title}</div>
+          {data.user_id === auth.user?.user_id && (
+            <button
+              onClick={() => navigate(`/${id}/edit`)}
+              className="bg-app-color text-sm uppercase py-1 min-w-14 h-fit rounded-lg font-bold text-white cursor-pointer"
+            >
+              Edit
+            </button>
+          )}
+        </div>
+        <div className="text-sm">
+          <SourceDestinationBar
+            source={data.source}
+            destination={data.destination}
+          />
+          <CheckpointList
+            checkpoints={data.checkpoints}
+            itineraryId={data.feed_id}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

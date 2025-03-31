@@ -2,20 +2,20 @@ import { useState, useEffect, MouseEvent } from "react";
 import { getUserMetadata } from "../../svc/auth";
 import { Profile } from "../../Icons/Profile";
 import { useNavigate } from "react-router-dom";
+import { TUserDTO } from "../../types";
 
-export const MetadataBar = (props: {
-  userId?: string;
-  timeStamp: string;
-}) => {
+export const MetadataBar = (props: { userId?: string; timeStamp: string }) => {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState<TUserDTO | null>(null);
   const { userId, timeStamp } = props;
 
   useEffect(() => {
     (async () => {
       if (userId) {
-        const _userName = await getUserMetadata(userId);
-        setUserName(_userName);
+        const user = await getUserMetadata(userId);
+        if (user) {
+          setUser(user);
+        }
       }
     })();
   }, []);
@@ -32,12 +32,13 @@ export const MetadataBar = (props: {
 
   return (
     <div className="flex items-center justify-between font-bold">
-      {userId && (
+      {userId && user && (
         <div
           onClick={navitgateToProfile}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <Profile /> {userName}
+          <Profile iconUrl={user.profile_pic} />
+          {user.user_name}
         </div>
       )}
       <div className="text-app-color-light">{timeStamp}</div>

@@ -11,11 +11,13 @@ import { store } from "../redux/store";
 export async function clientLoader() {
   store.dispatch(loader.actions.setloader(true));
   const user = await getUserSvc();
-  store.dispatch(auth.actions.setAuth({ user }));
-  await setUserMetadata({
-    user_id: user?.id || "",
-    user_name: user?.identities?.[0].identity_data?.name || "",
-  });
+  if (user) {
+    const userMetaData = await setUserMetadata({
+      user_id: user.id,
+      user_name: user.identities?.[0].identity_data?.name || "",
+    });
+    store.dispatch(auth.actions.setAuth({ user: userMetaData }));
+  }
   store.dispatch(loader.actions.setloader(false));
 }
 
