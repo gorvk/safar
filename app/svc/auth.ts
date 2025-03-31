@@ -1,4 +1,4 @@
-import { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/supabase-js";
 import { db } from "../supabase";
 import { TUserDTO } from "../types";
 

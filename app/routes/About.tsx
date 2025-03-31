@@ -4,9 +4,9 @@ import { Titlebar } from "../components/Titlebar/Titlebar";
 import { TSectionData } from "../types";
 import { ConclusionSection } from "../components/Landing/ConclusionSection";
 import { Footer } from "../components/Landing/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-export const About = () => {
+const About = () => {
   const sectionsData: TSectionData[] = [
     {
       title: "Sharable itineraries for your next trip",
@@ -69,3 +69,5 @@ export const About = () => {
     </>
   );
 };
+
+export default About;

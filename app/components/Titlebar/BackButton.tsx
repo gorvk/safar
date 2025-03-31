@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Back } from "../../Icons/Back";
 
 export const BackButton = () => {
   const navigate = useNavigate();
+  const location = useLocation()
 
   const handleBack = () => {
     if (history.length <= 2) {

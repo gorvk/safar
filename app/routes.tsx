@@ -1,14 +1,16 @@
-import { route, RouteConfig } from "@react-router/dev/routes";
-import { createBrowserRouter } from "react-router";
+import { route } from "@react-router/dev/routes";
 
-export const routes: RouteConfig = [
-  route("/", "./pages/Layout.tsx", [
-    route("/", "./pages/Home.tsx"),
-    route("add", "./pages/AddItinerary.tsx"),
-    route(":id/edit", "./pages/EditItinerary.tsx"),
-    route(":id/view", "./pages/View.tsx"),
-    route(":id/:checkpointId/view", "./pages/Checkpoint.tsx"),
-    route(":id/profile", "./pages/Profile.tsx"),
+const routes = [
+  route("/", "./routes/Layout.tsx", [
+    route("/", "./routes/Home.tsx"),
+    route("add", "./routes/AddItinerary.tsx"),
+    route(":id/edit", "./routes/EditItinerary.tsx"),
+    route(":id/view", "./routes/View.tsx"),
+    route(":id/:checkpointId/view", "./routes/Checkpoint.tsx"),
+    route(":id/profile", "./routes/Profile.tsx"),
   ]),
+  route("about", "./routes/About.tsx"),
+  route("legal", "./routes/Legal.tsx"),
 ];
-export const router = createBrowserRouter(routes);
+
+export default routes;

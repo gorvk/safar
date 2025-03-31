@@ -1,8 +1,10 @@
 import { Outlet, Scripts } from "react-router";
-
 import "./supabase/index.ts";
-import "../src/index.css";
-export default function Root() {
+import "./index.css";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
+
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -12,14 +14,22 @@ export default function Root() {
           name="description"
           content="Easy to share itineraries for your upcoming trips."
         />
-        <title>Toorist</title>
+        <title>Tooristt</title>
         <link rel="shortcut icon" href="#" />
       </head>
 
       <body className="bg-white font-sans">
-        <Outlet />
+        {children}
         <Scripts />
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Outlet />
+    </Provider>
   );
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const Footer = () => (
   <div className="flex lg:justify-between not-lg:flex-col w-full px-8 py-5 gap-10 not-lg:gap-4 text-app-color-light font-medium">

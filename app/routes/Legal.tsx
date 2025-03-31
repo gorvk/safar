@@ -1,6 +1,6 @@
 import { Titlebar } from "../components/Titlebar/Titlebar";
 
-export const Legal = () => {
+const Legal = () => {
   const points = [
     {
       title: "User-Generated Content",
@@ -46,8 +46,8 @@ export const Legal = () => {
         terms and conditions.
       </h2>
       <ol className="m-10 list-decimal font-bold flex flex-col gap-4 marker:text-app-secondary-color">
-        {points.map((point) => (
-          <li>
+        {points.map((point, index) => (
+          <li key={index}>
             <h2 className="text-app-color underline">{point.title}</h2>
             <h3 className="text-app-color-light font-medium">{point.detail}</h3>
           </li>
@@ -56,3 +56,5 @@ export const Legal = () => {
     </>
   );
 };
+
+export default Legal;

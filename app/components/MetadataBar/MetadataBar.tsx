@@ -1,7 +1,7 @@
 import { useState, useEffect, MouseEvent } from "react";
 import { getUserMetadata } from "../../svc/auth";
 import { Profile } from "../../Icons/Profile";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { TUserDTO } from "../../types";
 
 export const MetadataBar = (props: { userId?: string; timeStamp: string }) => {

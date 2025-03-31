@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router";
 import { FeedList } from "../components/Feed/FeedList";
 import { Edit } from "../Icons/Edit";
 import auth from "../redux/slices/auth";
