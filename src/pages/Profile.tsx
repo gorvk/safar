@@ -65,7 +65,7 @@ export const Profile = () => {
     <>
       <div className="text-center flex flex-col gap-4 items-center">
         <div className="relative">
-          <ProfileIcon iconUrl={profileData.profile_pic} size="24" />
+          <ProfileIcon iconUrl={profileData.profile_pic} size={96} />
           {profileData.user_id === authState?.user_id && (
             <label className="cursor-pointer text-3xl font-extrabold text-app-secondary-color absolute bottom-0 right-0.5">
               +
