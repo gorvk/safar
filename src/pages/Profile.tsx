@@ -29,6 +29,7 @@ export const Profile = () => {
         ...authState,
         profile_pic: data.publicUrl,
       });
+      setProfileData(user)
       store.dispatch(auth.actions.setAuth({ user }));
       store.dispatch(loader.actions.setloader(false));
     }
