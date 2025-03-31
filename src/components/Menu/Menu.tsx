@@ -40,7 +40,7 @@ const Menu = () => {
   const userOptions = [
     {
       label: "Profile",
-      handler: () => navigate(`${authState.user?.id}/profile`),
+      handler: () => navigate(`${authState.user?.user_id}/profile`),
     },
     { label: "Logout", handler: logout },
   ];

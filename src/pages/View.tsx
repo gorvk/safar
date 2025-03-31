@@ -46,7 +46,7 @@ export const View = () => {
         <hr className="text-app-seperator" />
         <div className="flex justify-between">
           <div className="text-md font-bold">{data.title}</div>
-          {data.user_id === auth.user?.id && (
+          {data.user_id === auth.user?.user_id && (
             <button
               onClick={() => navigate(`/${id}/edit`)}
               className="bg-app-color text-sm uppercase py-1 min-w-14 h-fit rounded-lg font-bold text-white cursor-pointer"

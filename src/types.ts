@@ -1,5 +1,3 @@
-import { User } from "@supabase/auth-js";
-
 export type TItineraryFeed = {
     title: string;
     user_id: string;
@@ -23,8 +21,13 @@ export type TItineraryFeedDTO = TItineraryFeed & {
     id: string;
 }
 
-export type TItineraryView = TItineraryDetailDTO & TItineraryFeedDTO;
+export type TUserDTO = {
+    user_id: string;
+    user_name: string;
+    profile_pic?: string;
+}
 
+export type TItineraryView = TItineraryDetailDTO & TItineraryFeedDTO;
 
 export type TCheckpoint = {
     title: string;
@@ -56,7 +59,7 @@ export type TFeedState = {
 }
 
 export type TAuthState = {
-    user: User | null;
+    user: TUserDTO | null;
 }
 
 export type TAppState = {

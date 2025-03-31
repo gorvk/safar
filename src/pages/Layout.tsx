@@ -15,11 +15,13 @@ export const Layout = () => {
   const authInit = async () => {
     dispatch(loader.actions.setloader(true));
     const user = await getUserSvc();
-    dispatch(auth.actions.setAuth({ user }));
-    await setUserMetadata({
-      user_id: user?.id || "",
-      user_name: user?.identities?.[0].identity_data?.name || "",
-    });
+    if (user) {
+      const userMetaData = await setUserMetadata({
+        user_id: user.id,
+        user_name: user.identities?.[0].identity_data?.name || "",
+      });
+      dispatch(auth.actions.setAuth({ user: userMetaData }));
+    }
     dispatch(loader.actions.setloader(false));
   };
 

@@ -33,7 +33,7 @@ export const EditItinerary = () => {
 
   if (!data) return <></>;
 
-  if (data.user_id !== auth.user?.id) {
+  if (data.user_id !== auth.user?.user_id) {
     return <Navigate to={`/${id}/view`} />;
   }
 
