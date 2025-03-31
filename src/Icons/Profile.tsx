@@ -2,7 +2,7 @@ export const Profile = (props: { size?: number; iconUrl?: string }) => {
   const size = props.size || 32;
   return props.iconUrl ? (
     <div
-      className="rounded-full overflow-hidden"
+      className="rounded-full overflow-hidden bg-app-color flex justify-center items-center"
       style={{ width: size + "px", height: size + "px" }}
     >
       <img src={props.iconUrl} />
