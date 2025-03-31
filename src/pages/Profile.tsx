@@ -45,6 +45,7 @@ const Profile = () => {
 
   const setProfilePic = async (file: FileList | null) => {
     if (file && authState && profileData?.user_id === authState.user_id) {
+      store.dispatch(loader.actions.setloader(true));
       const url = URL.createObjectURL(file[0]);
       const resourceName = await addToStorageBucketSF(url, "profile-pics");
       const data = await getBucketFileUrlSF(resourceName, "profile-pics");
@@ -53,6 +54,7 @@ const Profile = () => {
         profile_pic: data.publicUrl,
       });
       store.dispatch(auth.actions.setAuth({ user }));
+      store.dispatch(loader.actions.setloader(false));
     }
   };
 

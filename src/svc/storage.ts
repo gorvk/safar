@@ -11,6 +11,6 @@ export const addToStorageBucketSF = async (fileLocalUrl: string, bucketName: str
 export const getBucketFileUrlSF = async (resourceName: string, bucketName: string) => {
     const { data } = await db.storage
         .from(bucketName)
-        .getPublicUrl(resourceName, { transform: { width: 20, height: 20 } });
+        .getPublicUrl(resourceName);
     return data;
 }
