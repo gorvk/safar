@@ -100,7 +100,7 @@ const Profile = () => {
           )}
         </div>
         <span
-          className="w-full text-2xl flex gap-4 items-center justify-center font-bold text-app-color uppercase"
+          className="w-full text-2xl flex gap-4 items-center justify-center font-bold text-app-color"
           style={{ flexDirection: userNameInput ? "column" : "row" }}
         >
           <div>
