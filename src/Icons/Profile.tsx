@@ -1,7 +1,12 @@
 export const Profile = (props: { size?: number; iconUrl?: string }) => {
   const size = props.size || 32;
   return props.iconUrl ? (
-    <img src={props.iconUrl} width={size} height={size} className={`rounded-full`} />
+    <div
+      className="rounded-full overflow-hidden"
+      style={{ width: size + "px", height: size + "px" }}
+    >
+      <img src={props.iconUrl} />
+    </div>
   ) : (
     <svg
       xmlns="http://www.w3.org/2000/svg"

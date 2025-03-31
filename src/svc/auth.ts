@@ -8,7 +8,7 @@ export const googleAuthSvc = async (): Promise<TUserDTO | null> => {
     });
 
     if (error) {
-        console.error(error);
+        console.log(error);
         return null;
     }
 
@@ -32,7 +32,7 @@ export const getUserSvc = async (): Promise<User | null> => {
     } = await db.auth.getUser();
 
     if (error) {
-        console.error(error);
+        console.log(error);
         return null;
     }
 
@@ -43,7 +43,7 @@ export const setUserMetadata = async (payload: TUserDTO): Promise<TUserDTO | nul
     const { data, error } = await db.from("itinerary_user_map").select<"*", TUserDTO>("*").eq("user_id", payload.user_id);
 
     if (data?.length === 0) {
-        if (error) console.error(error);
+        if (error) console.log(error);
         const res = await db.from("itinerary_user_map").insert(payload).select<"*", TUserDTO>();
         if (!error && res.data) {
             return res.data[0];
@@ -67,7 +67,7 @@ export const getUserMetadata = async (user_id: string): Promise<TUserDTO | null>
     const { data, error } = await db.from("itinerary_user_map").select<"*", TUserDTO>("*").eq("user_id", user_id);
 
     if (error) {
-        console.error(error);
+        console.log(error);
         return null;
     }
 
