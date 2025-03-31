@@ -62,7 +62,7 @@ const Menu = () => {
               ...(!authState.user ? anonOptions : userOptions),
               ...commonOptions,
             ].map((option, index) => (
-              <li className="z-10">
+              <li className="z-10" key={index}>
                 {index !== 0 && <hr className="text-app-color-light"/>}
                 <Option label={option.label} handler={option.handler} />
               </li>
